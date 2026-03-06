@@ -27,7 +27,7 @@ double TaxCalculator::calculateFederalTaxBracketData(const User& user, const Tax
 
 double TaxCalculator::calculateTaxForBracket(int filingStatusIndex, double income, const TaxBracketRepository::FederalTaxBrackets& brackets)
 {
-	double tax = 0.0;
+	double taxFederal = 0.0;
 
 	for (int i = 0; i < 7; ++i)
 	{
@@ -38,8 +38,8 @@ double TaxCalculator::calculateTaxForBracket(int filingStatusIndex, double incom
 
 		double taxableInBracket = std::min(income, static_cast<double>(bracket.maxIncome))
 			- static_cast<double>(bracket.minIncome);
-		tax += taxableInBracket * bracket.rate;
+		taxFederal += taxableInBracket * bracket.rate;
 	}
 
-	return tax;
+	return taxFederal;
 }

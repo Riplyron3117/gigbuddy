@@ -1,7 +1,7 @@
+#pragma once
 #ifndef TAXBRACKETREPOSITORY_H
 #define TAXBRACKETREPOSITORY_H	
 
-#pragma once
 #include <array>
 class TaxBracketRepository
 {
@@ -18,6 +18,7 @@ public:
 	{
 		std::array<FederalTaxRates, 7> percentageRates{};
 	};
+
 	std::array<FederalTaxBrackets, 4> federalFilingStatus{};
 
 	const struct StateTaxRates

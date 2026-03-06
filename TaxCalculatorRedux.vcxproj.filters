@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TaxRedux.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,9 +36,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputCollector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TaxRedux.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TaxBracketRepository.h">
