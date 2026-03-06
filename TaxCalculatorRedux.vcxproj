@@ -127,6 +127,7 @@
     <ClCompile Include="InputCollector.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="TaxBracketRepository.cpp" />
+    <ClCompile Include="TaxCalculator.cpp" />
     <ClCompile Include="TaxRedux.cpp" />
     <ClCompile Include="User.cpp" />
   </ItemGroup>
@@ -134,6 +135,7 @@
     <ClInclude Include="DisplayService.h" />
     <ClInclude Include="InputCollector.h" />
     <ClInclude Include="TaxBracketRepository.h" />
+    <ClInclude Include="TaxCalculator.h" />
     <ClInclude Include="TaxRedux.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>

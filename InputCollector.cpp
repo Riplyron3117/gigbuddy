@@ -1,0 +1,256 @@
+#include "InputCollector.h"
+#include <string>
+#include <iostream>
+#include <cctype>
+#include <limits>
+
+using namespace std;
+
+InputCollector::InputCollector() {}
+
+
+//collectName() collects user's name as input
+
+std::string InputCollector::collectName()
+{
+    std::string userName;
+    bool userNameValidation;
+
+    do		//do-while loop collects users input and validates. 
+	{
+		std::cout << "Please Enter your Full Name: ";
+		std::getline(std::cin, userName);
+
+		userNameValidation = true;
+
+		if (userName.empty()) //checks for empty input
+		{
+			userNameValidation = false;
+			std::cout << "Invalid Input: Please enter a valid name " << std::endl;
+			continue;
+		}
+
+		bool hasAlpha = false; //checks for at least one alpha character
+
+		for (char c : userName)		//iterates through Input checking for invalid characters.
+		{
+			if (!std::isalpha(static_cast<unsigned char>(c)) && !std::isspace(static_cast<unsigned char>(c)))
+			{
+				userNameValidation = false;
+				std::cout << "Invalid Input: Please enter a valid name " << std::endl;
+				break;
+			}
+			if (std::isalpha(static_cast<unsigned char>(c)))
+			{
+				hasAlpha = true;
+			}
+		}
+
+		if (!hasAlpha) //calidates the presence of at least one alpha character.
+		{
+			userNameValidation = false;
+			std::cout << "Invalid Input: Please enter a valid name " << std::endl;
+			continue;
+		}
+
+		if (userNameValidation == true) break;
+
+	} while (userNameValidation == false);
+
+	return userName;
+}
+
+//collectAge() collects users Age and Validates input
+int InputCollector::collectAge()
+{
+	std::string inputAge;	//initial string variable for checking for spaces, alpha characters, and symbols.
+	int age = 0;
+	bool ageValidation;
+
+	do		//do-while collects user input and validates before value is returned.
+	{
+		std::cout << "Please enter a Valid age over 18 years old:  ";
+		std::getline(std::cin, inputAge);
+
+		ageValidation = true;
+
+		if (inputAge.find(' ') != std::string::npos)	//checks for spaces in input
+		{
+			ageValidation = false;
+			std::cout << "Invalid Input. ";
+			continue;
+		}
+
+		for (char c : inputAge)		//iterates over input, checking for non digit characters
+		{
+			if (!std::isdigit(static_cast<unsigned char>(c)))
+			{
+				ageValidation = false;
+				std::cout << "Invalid Input. ";
+				break;
+			}
+		}
+
+		if (!ageValidation) continue;  //if false, skips to condition check.
+
+		try		//converts string inputAge into integar and stors in variable age.
+		{
+			age = std::stoi(inputAge);
+		}
+		catch (const std::invalid_argument&) //catches invalid argument exceptions.
+		{
+			std::cout << "Invalid Input. ";
+			ageValidation = false;
+			continue;
+		}
+		catch (const std::out_of_range&)	//catches arguments that are out of range.
+		{
+			std::cout << "Invalid Input. ";
+			ageValidation = false;
+			continue;
+		}
+
+		if (age < 18 || age > 120)			//Validates age
+		{
+			ageValidation = false;
+			std::cout << "Invalid Input. ";
+			continue;
+		}
+
+		if (ageValidation == true) break;
+	} while (ageValidation == false);
+
+	return age;
+}
+
+float InputCollector::collectIncome()
+{
+	std::string inputAnnualIncome;
+	float annualIncome = 0;
+	bool incomeValidation;
+
+
+	do
+	{
+		std::cout << "Please enter your annual income: ";
+		std::getline(std::cin, inputAnnualIncome);
+
+		incomeValidation = true;
+		bool decimalSeen = false;
+
+
+		if (inputAnnualIncome.empty())
+		{
+			incomeValidation = false;
+			std::cout << "Invalid Input. ";
+			continue;
+		}
+
+		if (inputAnnualIncome.find(' ') != std::string::npos)
+		{
+			incomeValidation = false;
+			std::cout << "Invalid Input. ";
+			continue;
+		}
+
+		for (size_t input_size = 0; input_size < inputAnnualIncome.size(); input_size++)
+		{
+			char c = inputAnnualIncome[input_size];
+
+			if (c == '.')
+			{
+				if (decimalSeen)
+				{
+					incomeValidation = false;
+					break;
+				}
+				decimalSeen = true;
+			}
+
+			else if (!std::isdigit(static_cast<unsigned char>(c)))
+			{
+				incomeValidation = false;
+				break;
+			}
+		}
+
+		if (!incomeValidation)
+		{
+			std::cout << "Invalid Input. ";
+			continue;
+		}
+
+		try
+		{
+			annualIncome = std::stof(inputAnnualIncome);
+		}
+		catch (const std::invalid_argument&)
+		{
+			std::cout << "Invalid Input. ";
+			incomeValidation = false;
+			continue;
+		}
+		catch (const std::out_of_range&)
+		{
+			std::cout << "Invalid Input, ";
+			incomeValidation = false;
+			continue;
+		}
+
+		if (annualIncome < 0)
+		{
+			std::cout << "ERROR: Income cannot be a negative number";
+			incomeValidation = false;
+			continue;
+		}
+
+		if (incomeValidation == true) break;
+
+	} while (!incomeValidation);
+
+	return annualIncome;
+}
+
+int InputCollector::collectFilingStatus()
+{
+	std::string filingStatusSelection;
+	int selection = 0;
+	bool validSelection;
+
+	do
+	{
+		std::cout
+			<< "1. Single. \n"
+			<< "2. Married Filing Jointly. \n"
+			<< "3. Married Filing Seperate. \n"
+			<< "4. Head of Household. \n"
+			<< "Please select your filing status by typing the corresponding number and pressing enter: ";
+		std::cin >> filingStatusSelection;
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //clears input buffer
+
+		validSelection = true;
+
+		for (char input_size = 0; input_size < filingStatusSelection.size(); input_size++)
+
+		{
+			char c = filingStatusSelection[input_size];
+
+			if (!std::isdigit(static_cast<unsigned char>(c)))
+			{
+				std::cout << "Invalid Input: Please enter a number between 1-4. \n";
+				validSelection = false;
+				break;
+			}
+		}
+		selection = std::stoi(filingStatusSelection);
+
+		if (selection < 1 || selection > 4)
+		{
+			std::cout << "invalid input: please enter a number between 1-4. \n";
+			validSelection = false;
+			break;
+		}
+	} while (!validSelection);
+
+	return selection;
+}
