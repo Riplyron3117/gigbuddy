@@ -19,12 +19,17 @@ int main()
 	bob.setAge(infoCollection.collectAge());
 	bob.setAnnualIncome(infoCollection.collectIncome());
 	bob.setFilingStatus(infoCollection.collectFilingStatus());
+
+	//calculate federal tax and store result
+	// Note: This line chains two operations:
+	//   1. calculateFederalTaxBracketData() - Computes tax using bob's income/filing status and tax bracket tables
+	//   2. setTaxableIncome() - Stores the computed tax value in bob for later display.
+	bob.setTaxableIncome(taxCalculator.calculateFederalTaxBracketData(bob, taxRepository)); //
+
 	bob.setUserDisplayChoice(infoCollection.userDisplayChoice());
 
-	double federalTax = taxCalculator.calculateFederalTaxBracketData(bob, taxRepository);
-
-	display.displayUserInformation(bob);
-	display.displayFederalTaxResult(bob, federalTax);
+	display.displayController(bob);
+	
 
 	
 }
