@@ -14,12 +14,19 @@ InputCollector::InputCollector() {}
 std::string InputCollector::collectName()
 {
     std::string userName;
-    bool userNameValidation;
+    bool userNameValidation = false;
 
     do		//do-while loop collects users input and validates. 
 	{
 		std::cout << "Please Enter your Full Name: ";
 		std::getline(std::cin, userName);
+
+		//adds check bounds to prevent out of range errors when validating input.
+		if (userName.length() > 100)
+		{
+			std::cout << "Invalid Input: Name cannot exceed 100 characters. Please enter a valid name. " << std::endl;
+			continue;
+		}
 
 		userNameValidation = true;
 
@@ -65,12 +72,18 @@ int InputCollector::collectAge()
 {
 	std::string inputAge;	//initial string variable for checking for spaces, alpha characters, and symbols.
 	int age = 0;
-	bool ageValidation;
+	bool ageValidation = false;
 
 	do		//do-while collects user input and validates before value is returned.
 	{
 		std::cout << "Please enter a Valid age over 18 years old:  ";
 		std::getline(std::cin, inputAge);
+
+		if (inputAge.length() > 3)		//adds check bounds to prevent out of range errors when validating input.
+		{
+			std::cout << "Invalid Input. ";
+			continue;
+		}
 
 		ageValidation = true;
 
@@ -123,17 +136,23 @@ int InputCollector::collectAge()
 	return age;
 }
 
-float InputCollector::collectIncome()
+double InputCollector::collectIncome()
 {
 	std::string inputAnnualIncome;
-	float annualIncome = 0;
-	bool incomeValidation;
+	double annualIncome = 0;
+	bool incomeValidation = false;
 
 
 	do
 	{
 		std::cout << "Please enter your annual income: ";
 		std::getline(std::cin, inputAnnualIncome);
+
+		if (inputAnnualIncome.length() > 15) //adds check bounds to prevent out of range errors when validating input.
+		{
+			std::cout << "Invalid Input. ";
+			continue;
+		}
 
 		incomeValidation = true;
 		bool decimalSeen = false;
@@ -182,7 +201,7 @@ float InputCollector::collectIncome()
 
 		try
 		{
-			annualIncome = std::stof(inputAnnualIncome);
+			annualIncome = std::stod(inputAnnualIncome);
 		}
 		catch (const std::invalid_argument&)
 		{
@@ -215,7 +234,7 @@ int InputCollector::collectFilingStatus()
 {
 	std::string filingStatusSelection;
 	int selection = 0;
-	bool validSelection;
+	bool validSelection = false;
 
 	do
 	{
@@ -225,8 +244,14 @@ int InputCollector::collectFilingStatus()
 			<< "3. Married Filing Seperate. \n"
 			<< "4. Head of Household. \n"
 			<< "Please select your filing status by typing the corresponding number and pressing enter: ";
-		std::cin >> filingStatusSelection;
+		std::getline(std::cin, filingStatusSelection);
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //clears input buffer
+
+		if (filingStatusSelection.length() > 1) 	//adds check bounds to prevent out of range errors when validating input.
+		{
+			std::cout << "Invalid Input: Please enter a number between 1-4. \n";
+			continue;
+		}
 
 		validSelection = true;
 
@@ -264,7 +289,7 @@ int InputCollector::collectFilingStatus()
 		
 		if (selection < 1 || selection > 4)
 		{
-			std::cout << "invalid input: please enter a number between 1-4. \n";
+			std::cout << "Invalid input: please enter a number between 1-4. \n";
 			validSelection = false;
 			continue;
 		}
@@ -283,6 +308,13 @@ char InputCollector::userDisplayChoice()
 		std::cout << "Would you like to display the results? (Y/N); " << std::endl;
 		std::getline(std::cin, userInput);
 
+		if (userInput.length() > 1) //adds check bounds to prevent out of range errors when validating input.
+		{
+			validChoice = false;
+			std::cout << "Invalid input: Please select Y for yes or N for no. " << std::endl;
+			continue;
+		}
+
 		//check for empty input
 		if (userInput.empty())
 		{
@@ -296,13 +328,6 @@ char InputCollector::userDisplayChoice()
 		{
 			validChoice = false;
 			std::cout << "invalid input : please select Y for yes or N for no. " << std::endl;
-			continue;
-		}
-
-		if (userInput.length() > 1)
-		{
-			validChoice = false;
-			std::cout << "Invalid input: Please select Y for yes or N for no. " << std::endl;
 			continue;
 		}
 

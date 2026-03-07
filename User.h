@@ -10,7 +10,7 @@ private:
 		std::string name_ = "";
 		char userDisplayChoice_ = ' ';
 		int age_ = 0;
-		float annualIncome_ = 0.0;
+		double annualIncome_ = 0.0;
 		int filingStatus_ = 0;
 		double taxableIncome_ = 0.0;
 
@@ -22,7 +22,7 @@ public:
 	 
 	int getAge() const { return age_; }
 
-	float getAnnualIncome() const { return annualIncome_; }
+	double getAnnualIncome() const { return annualIncome_; }
 
 	int getFilingStatus() const { return filingStatus_; }
 
@@ -35,7 +35,7 @@ public:
 
 	void setAge(int age) { age_ = age; }
 
-	void setAnnualIncome(float income) { annualIncome_ = income; }
+	void setAnnualIncome(double income) { annualIncome_ = income; }
 
 	void setFilingStatus(int status) { filingStatus_ = status; }
 

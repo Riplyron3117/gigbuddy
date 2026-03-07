@@ -1,4 +1,6 @@
 ﻿#include "TaxBracketRepository.h"
+#include <stdexcept>
+#include <string>
 #include <climits>
 
 TaxBracketRepository::TaxBracketRepository()
@@ -58,7 +60,7 @@ const TaxBracketRepository::FederalTaxBrackets& TaxBracketRepository::getFederal
 {
 	if (filingStatusIndex < 0 || filingStatusIndex >= 4)
 	{
-		throw std::abort; // Invalid filing status index.
+		throw std::out_of_range("Filing status index out of range " + std::to_string(filingStatusIndex)); // Invalid filing status index.
 	}
 	return federalFilingStatus[filingStatusIndex];
 }

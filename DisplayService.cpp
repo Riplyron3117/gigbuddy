@@ -23,16 +23,6 @@ std::string DisplayService::getFilingStatusName(int filingStatus) const
 
 void DisplayService::displayUserInformation(const User& user) const
 {
-	std::string filingStatusName;
-	switch (user.getFilingStatus())
-	{
-	case 1: filingStatusName = "Single"; break;
-	case 2: filingStatusName = "Married Filing Jointly"; break;
-	case 3: filingStatusName = "Married Filing Seperate"; break;
-	case 4: filingStatusName = "Head of Household"; break;
-	default: filingStatusName = "Unknown"; break;
-	}
-
 	std::cout << "Name: " << user.getName() << std::endl;
 	std::cout << "Age: " << user.getAge() << std::endl;
 	std::cout << "Annual Income: $" << user.getAnnualIncome() << std::endl;

@@ -10,8 +10,8 @@ public:
 	struct FederalTaxRates
 	{
 		double rate{};
-		int minIncome{};
-		int maxIncome{};
+		double minIncome{};
+		double maxIncome{};
 	};
 
 	struct FederalTaxBrackets
