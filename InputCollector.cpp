@@ -230,7 +230,7 @@ int InputCollector::collectFilingStatus()
 
 		validSelection = true;
 
-		for (char input_size = 0; input_size < filingStatusSelection.size(); input_size++)
+		for (size_t input_size = 0; input_size < filingStatusSelection.size(); input_size++)
 
 		{
 			char c = filingStatusSelection[input_size];
@@ -242,15 +242,82 @@ int InputCollector::collectFilingStatus()
 				break;
 			}
 		}
-		selection = std::stoi(filingStatusSelection);
 
+		if (!validSelection) continue;
+
+		try
+		{
+			selection = std::stoi(filingStatusSelection);
+		}
+		catch (const std::invalid_argument&)
+		{
+			std::cout << "Invalid Input: Please enter a number between 1-4. \n";
+			validSelection = false;
+			continue;
+		}
+		catch (const std::out_of_range&)
+		{
+			std::cout << "Invalid Input: Please enter a number between 1-4. \n";
+			validSelection = false;
+			continue;
+		}
+		
 		if (selection < 1 || selection > 4)
 		{
 			std::cout << "invalid input: please enter a number between 1-4. \n";
 			validSelection = false;
-			break;
+			continue;
 		}
 	} while (!validSelection);
 
 	return selection;
+}
+
+char InputCollector::userDisplayChoice()
+{
+	std::string userInput;
+	bool validChoice = false;
+
+	do
+	{
+		std::cout << "Would you like to display the results? (Y/N); " << std::endl;
+		std::getline(std::cin, userInput);
+
+		//check for empty input
+		if (userInput.empty())
+		{
+			validChoice = false;
+			std::cout << "invalid input : please select Y for yes or N for no. " << std::endl;
+			continue;
+		}
+
+		//check for whitespace
+		if (userInput.find_first_not_of(" \t") == std::string::npos)
+		{
+			validChoice = false;
+			std::cout << "invalid input : please select Y for yes or N for no. " << std::endl;
+			continue;
+		}
+
+		if (userInput.length() > 1)
+		{
+			validChoice = false;
+			std::cout << "Invalid input: Please select Y for yes or N for no. " << std::endl;
+			continue;
+		}
+
+		char userChoice = userInput[0];
+		if (userChoice != 'Y' && userChoice != 'y' && userChoice != 'N' && userChoice != 'n')
+		{
+			validChoice = false;
+			std::cout << "invalid input : please select Y for yes or N for no. " << std::endl;
+			continue;
+		}
+
+		validChoice = true;
+		return userChoice;
+
+	} while (!validChoice);
+
+
 }

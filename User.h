@@ -8,6 +8,7 @@ class User
 {
 private:
 		std::string name_ = "";
+		char userDisplayChoice_ = ' ';
 		int age_ = 0;
 		float annualIncome_ = 0.0;
 		int filingStatus_ = 0;
@@ -27,6 +28,8 @@ public:
 
 	double getTaxableIncome() const { return taxableIncome_; }
 
+	char getUserDisplayChoice() const { return userDisplayChoice_; }
+
 	//setters for user data
 	void setName(const std::string& name) { name_ = name; }
 
@@ -37,6 +40,8 @@ public:
 	void setFilingStatus(int status) { filingStatus_ = status; }
 
 	void setTaxableIncome(double taxableIncome) { taxableIncome_ = taxableIncome; }
+
+	void setUserDisplayChoice(char choice) { userDisplayChoice_ = choice; }
 
 
 

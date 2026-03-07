@@ -19,10 +19,12 @@ int main()
 	bob.setAge(infoCollection.collectAge());
 	bob.setAnnualIncome(infoCollection.collectIncome());
 	bob.setFilingStatus(infoCollection.collectFilingStatus());
+	bob.setUserDisplayChoice(infoCollection.userDisplayChoice());
 
 	double federalTax = taxCalculator.calculateFederalTaxBracketData(bob, taxRepository);
 
 	display.displayUserInformation(bob);
 	display.displayFederalTaxResult(bob, federalTax);
+
 	
 }

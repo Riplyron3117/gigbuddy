@@ -56,6 +56,10 @@ void TaxBracketRepository::initializeStateTaxBracketData()
 
 const TaxBracketRepository::FederalTaxBrackets& TaxBracketRepository::getFederalTaxBrackets(int filingStatusIndex) const
 {
+	if (filingStatusIndex < 0 || filingStatusIndex >= 4)
+	{
+		throw std::abort; // Invalid filing status index.
+	}
 	return federalFilingStatus[filingStatusIndex];
 }
 

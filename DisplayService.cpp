@@ -38,6 +38,7 @@ void DisplayService::displayUserInformation(const User& user) const
 	std::cout << "Annual Income: $" << user.getAnnualIncome() << std::endl;
 	std::cout << "Filing Status: " << getFilingStatusName(user.getFilingStatus()) << std::endl;
 	std::cout << "Calculated Federal Tax: $" << user.getTaxableIncome() << std::endl;
+	std::cout << user.getUserDisplayChoice() << std::endl;
 }
 
 void DisplayService::displayFederalTaxResult(const User& user, double federalTax) const
@@ -63,3 +64,4 @@ std::string DisplayService::formatCurrency(double amount) const
 	oss << std::fixed << std::setprecision(2) << amount;
 	return oss.str();
 }
+

@@ -14,4 +14,6 @@ public:
 	float collectIncome();
 
 	int collectFilingStatus();
+
+	char userDisplayChoice();
 };
