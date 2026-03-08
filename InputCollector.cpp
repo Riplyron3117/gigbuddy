@@ -245,7 +245,7 @@ int InputCollector::collectFilingStatus()
 			<< "4. Head of Household. \n"
 			<< "Please select your filing status by typing the corresponding number and pressing enter: ";
 		std::getline(std::cin, filingStatusSelection);
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //clears input buffer
+		 
 
 		if (filingStatusSelection.length() > 1) 	//adds check bounds to prevent out of range errors when validating input.
 		{
@@ -319,7 +319,7 @@ char InputCollector::userDisplayChoice()
 		if (userInput.empty())
 		{
 			validChoice = false;
-			std::cout << "invalid input : please select Y for yes or N for no. " << std::endl;
+			std::cout << "Invalid input : please select Y for yes or N for no. " << std::endl;
 			continue;
 		}
 
@@ -327,7 +327,7 @@ char InputCollector::userDisplayChoice()
 		if (userInput.find_first_not_of(" \t") == std::string::npos)
 		{
 			validChoice = false;
-			std::cout << "invalid input : please select Y for yes or N for no. " << std::endl;
+			std::cout << "Invalid input : please select Y for yes or N for no. " << std::endl;
 			continue;
 		}
 
@@ -335,7 +335,7 @@ char InputCollector::userDisplayChoice()
 		if (userChoice != 'Y' && userChoice != 'y' && userChoice != 'N' && userChoice != 'n')
 		{
 			validChoice = false;
-			std::cout << "invalid input : please select Y for yes or N for no. " << std::endl;
+			std::cout << "Invalid input : please select Y for yes or N for no. " << std::endl;
 			continue;
 		}
 
@@ -344,5 +344,5 @@ char InputCollector::userDisplayChoice()
 
 	} while (!validChoice);
 
-
+	return ' ';
 }

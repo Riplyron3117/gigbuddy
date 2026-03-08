@@ -1,4 +1,6 @@
 #include "TaxCalculator.h"
+#include <optional>
+#include <algorithm>
 using namespace std;
 
 TaxCalculator::TaxCalculator() {}
@@ -36,7 +38,7 @@ double TaxCalculator::calculateTaxForBracket(int filingStatusIndex, double incom
 		if (income <= bracket.minIncome)
 			break;
 
-		double taxableInBracket = std::min(income, static_cast<double>(bracket.maxIncome))
+		double taxableInBracket = std::min(income, static_cast<double>(bracket.maxIncome.value_or(income)))
 			- static_cast<double>(bracket.minIncome);
 		taxFederal += taxableInBracket * bracket.rate;
 	}
