@@ -92,5 +92,70 @@ bool InputValidator::validateAge(const std::string& age, int& outAge) const
 	}
 
 	return true;
+}
 
+bool InputValidator::validateIncome(const std::string& income, double& outIncome) const
+{
+	bool decimalSeen = false;
+
+	if (income.empty())
+	{
+		std::cout << ErrorMessages::invalidIncome << std::endl;
+		return false;
+	}
+
+	if (income.length() > 15) //adds check bounds to prevent out of range errors when validating input.
+	{
+		std::cout << ErrorMessages::invalidIncome << std::endl;
+		return false;
+	}
+		
+	if (income.find(' ') != std::string::npos)
+	{
+		std::cout << ErrorMessages::invalidIncome << std::endl;
+		return false;
+	}
+
+	for (size_t input_size = 0; input_size < income.size(); input_size++)
+	{
+		char c = income[input_size];
+
+		if (c == '.')
+		{
+			if (decimalSeen)
+			{
+				std::cout << ErrorMessages::invalidIncome << std::endl;
+				return false;
+			}
+			decimalSeen = true;
+		}
+
+		else if (!std::isdigit(static_cast<unsigned char>(c)))
+		{
+			std::cout << ErrorMessages::invalidIncome << std::endl;
+			return false;
+		}
+	}
+
+	try
+	{
+		outIncome = std::stod(income);
+	}
+	catch (const std::invalid_argument&)
+	{
+		std::cout << ErrorMessages::invalidIncome << std::endl;
+		return false;
+	}
+	catch (const std::out_of_range&)
+	{
+		std::cout << ErrorMessages::invalidIncome << std::endl;
+		return false;
+	}
+
+	if (outIncome < 0)
+	{
+		std::cout << ErrorMessages::invalidIncome << std::endl;
+		return false;
+	}
+	return true;
 }

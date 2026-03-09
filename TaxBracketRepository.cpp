@@ -1,7 +1,6 @@
 ﻿#include "TaxBracketRepository.h"
 #include <stdexcept>
 #include <string>
-#include <climits>
 #include <optional>
 
 TaxBracketRepository::TaxBracketRepository()

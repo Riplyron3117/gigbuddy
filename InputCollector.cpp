@@ -3,7 +3,6 @@
 #include <string>
 #include <iostream>
 #include <cctype>
-#include <limits>
 
 using namespace std;
 
@@ -59,86 +58,14 @@ double InputCollector::collectIncome()
 	std::string inputAnnualIncome;
 	double annualIncome = 0;
 	bool incomeValidation = false;
+	InputValidator incomeValidator;
 
 	do
 	{
 		std::cout << "Please enter your annual income: ";
 		std::getline(std::cin, inputAnnualIncome);
 
-		if (inputAnnualIncome.length() > 15) //adds check bounds to prevent out of range errors when validating input.
-		{
-			std::cout << "Invalid Input. ";
-			continue;
-		}
-
-		incomeValidation = true;
-		bool decimalSeen = false;
-
-
-		if (inputAnnualIncome.empty())
-		{
-			incomeValidation = false;
-			std::cout << "Invalid Input. ";
-			continue;
-		}
-
-		if (inputAnnualIncome.find(' ') != std::string::npos)
-		{
-			incomeValidation = false;
-			std::cout << "Invalid Input. ";
-			continue;
-		}
-
-		for (size_t input_size = 0; input_size < inputAnnualIncome.size(); input_size++)
-		{
-			char c = inputAnnualIncome[input_size];
-
-			if (c == '.')
-			{
-				if (decimalSeen)
-				{
-					incomeValidation = false;
-					break;
-				}
-				decimalSeen = true;
-			}
-
-			else if (!std::isdigit(static_cast<unsigned char>(c)))
-			{
-				incomeValidation = false;
-				break;
-			}
-		}
-
-		if (!incomeValidation)
-		{
-			std::cout << "Invalid Input. ";
-			continue;
-		}
-
-		try
-		{
-			annualIncome = std::stod(inputAnnualIncome);
-		}
-		catch (const std::invalid_argument&)
-		{
-			std::cout << "Invalid Input. ";
-			incomeValidation = false;
-			continue;
-		}
-		catch (const std::out_of_range&)
-		{
-			std::cout << "Invalid Input, ";
-			incomeValidation = false;
-			continue;
-		}
-
-		if (annualIncome < 0)
-		{
-			std::cout << "ERROR: Income cannot be a negative number";
-			incomeValidation = false;
-			continue;
-		}
+		incomeValidation = incomeValidator.validateIncome(inputAnnualIncome, annualIncome);
 
 		if (incomeValidation == true) break;
 

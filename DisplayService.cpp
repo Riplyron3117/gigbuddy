@@ -1,6 +1,7 @@
 #include <iomanip>
 #include <sstream>
-#include "InputCollector.h"
+#include <iostream>
+
 #include "DisplayService.h"
 
 DisplayService::DisplayService() {}
