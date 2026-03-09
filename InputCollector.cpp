@@ -1,4 +1,5 @@
 #include "InputCollector.h"
+#include "InputValidator.h"
 #include <string>
 #include <iostream>
 #include <cctype>
@@ -15,50 +16,14 @@ std::string InputCollector::collectName()
 {
     std::string userName;
     bool userNameValidation = false;
+	InputValidator nameValidator;
 
     do		//do-while loop collects users input and validates. 
 	{
 		std::cout << "Please Enter your Full Name: ";
 		std::getline(std::cin, userName);
 
-		//adds check bounds to prevent out of range errors when validating input.
-		if (userName.length() > 100)
-		{
-			std::cout << "Invalid Input: Name cannot exceed 100 characters. Please enter a valid name. " << std::endl;
-			continue;
-		}
-
-		userNameValidation = true;
-
-		if (userName.empty()) //checks for empty input
-		{
-			userNameValidation = false;
-			std::cout << "Invalid Input: Please enter a valid name " << std::endl;
-			continue;
-		}
-
-		bool hasAlpha = false; //checks for at least one alpha character
-
-		for (char c : userName)		//iterates through Input checking for invalid characters.
-		{
-			if (!std::isalpha(static_cast<unsigned char>(c)) && !std::isspace(static_cast<unsigned char>(c)))
-			{
-				userNameValidation = false;
-				std::cout << "Invalid Input: Please enter a valid name " << std::endl;
-				break;
-			}
-			if (std::isalpha(static_cast<unsigned char>(c)))
-			{
-				hasAlpha = true;
-			}
-		}
-
-		if (!hasAlpha) //calidates the presence of at least one alpha character.
-		{
-			userNameValidation = false;
-			std::cout << "Invalid Input: Please enter a valid name " << std::endl;
-			continue;
-		}
+		userNameValidation = nameValidator.validateName(userName);
 
 		if (userNameValidation == true) break;
 
@@ -70,6 +35,7 @@ std::string InputCollector::collectName()
 //collectAge() collects users Age and Validates input
 int InputCollector::collectAge()
 {
+	InputValidator ageValidator;
 	std::string inputAge;	//initial string variable for checking for spaces, alpha characters, and symbols.
 	int age = 0;
 	bool ageValidation = false;
@@ -79,58 +45,10 @@ int InputCollector::collectAge()
 		std::cout << "Please enter a Valid age over 18 years old:  ";
 		std::getline(std::cin, inputAge);
 
-		if (inputAge.length() > 3)		//adds check bounds to prevent out of range errors when validating input.
-		{
-			std::cout << "Invalid Input. ";
-			continue;
-		}
-
-		ageValidation = true;
-
-		if (inputAge.find(' ') != std::string::npos)	//checks for spaces in input
-		{
-			ageValidation = false;
-			std::cout << "Invalid Input. ";
-			continue;
-		}
-
-		for (char c : inputAge)		//iterates over input, checking for non digit characters
-		{
-			if (!std::isdigit(static_cast<unsigned char>(c)))
-			{
-				ageValidation = false;
-				std::cout << "Invalid Input. ";
-				break;
-			}
-		}
-
-		if (!ageValidation) continue;  //if false, skips to condition check.
-
-		try		//converts string inputAge into integar and stors in variable age.
-		{
-			age = std::stoi(inputAge);
-		}
-		catch (const std::invalid_argument&) //catches invalid argument exceptions.
-		{
-			std::cout << "Invalid Input. ";
-			ageValidation = false;
-			continue;
-		}
-		catch (const std::out_of_range&)	//catches arguments that are out of range.
-		{
-			std::cout << "Invalid Input. ";
-			ageValidation = false;
-			continue;
-		}
-
-		if (age < 18 || age > 120)			//Validates age
-		{
-			ageValidation = false;
-			std::cout << "Invalid Input. ";
-			continue;
-		}
+		ageValidation = ageValidator.validateAge(inputAge, age);
 
 		if (ageValidation == true) break;
+
 	} while (ageValidation == false);
 
 	return age;
@@ -141,7 +59,6 @@ double InputCollector::collectIncome()
 	std::string inputAnnualIncome;
 	double annualIncome = 0;
 	bool incomeValidation = false;
-
 
 	do
 	{
