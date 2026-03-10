@@ -159,3 +159,45 @@ bool InputValidator::validateIncome(const std::string& income, double& outIncome
 	}
 	return true;
 }
+
+bool InputValidator::validateFilingStatus(const std::string& filingStatus, int& outFilingStatus) const
+{
+	if (filingStatus.length() > 1) 	//adds check bounds to prevent out of range errors when validating input.
+	{
+		std::cout << "Invalid Input: Please enter a number between 1-4. \n";
+		
+	}
+
+	for (size_t input_size = 0; input_size < filingStatus.size(); input_size++)
+
+	{
+		char c = filingStatus[input_size];
+
+		if (!std::isdigit(static_cast<unsigned char>(c)))
+		{
+			std::cout << "Invalid Input: Please enter a number between 1-4. \n";
+			return false;
+		}
+	}
+
+	try
+	{
+		outFilingStatus = std::stoi(filingStatus);
+	}
+	catch (const std::invalid_argument&)
+	{
+		std::cout << "Invalid Input: Please enter a number between 1-4. \n";
+		return false;
+	}
+	catch (const std::out_of_range&)
+	{
+		std::cout << "Invalid Input: Please enter a number between 1-4. \n";
+		return false;
+	}
+
+	if (outFilingStatus < 1 || outFilingStatus > 4)
+	{
+		std::cout << "Invalid input: please enter a number between 1-4. \n";
+		return false;
+	}
+}

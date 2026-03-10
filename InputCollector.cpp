@@ -90,53 +90,6 @@ int InputCollector::collectFilingStatus()
 			<< "Please select your filing status by typing the corresponding number and pressing enter: ";
 		std::getline(std::cin, filingStatusSelection);
 		 
-
-		if (filingStatusSelection.length() > 1) 	//adds check bounds to prevent out of range errors when validating input.
-		{
-			std::cout << "Invalid Input: Please enter a number between 1-4. \n";
-			continue;
-		}
-
-		validSelection = true;
-
-		for (size_t input_size = 0; input_size < filingStatusSelection.size(); input_size++)
-
-		{
-			char c = filingStatusSelection[input_size];
-
-			if (!std::isdigit(static_cast<unsigned char>(c)))
-			{
-				std::cout << "Invalid Input: Please enter a number between 1-4. \n";
-				validSelection = false;
-				break;
-			}
-		}
-
-		if (!validSelection) continue;
-
-		try
-		{
-			selection = std::stoi(filingStatusSelection);
-		}
-		catch (const std::invalid_argument&)
-		{
-			std::cout << "Invalid Input: Please enter a number between 1-4. \n";
-			validSelection = false;
-			continue;
-		}
-		catch (const std::out_of_range&)
-		{
-			std::cout << "Invalid Input: Please enter a number between 1-4. \n";
-			validSelection = false;
-			continue;
-		}
-		
-		if (selection < 1 || selection > 4)
-		{
-			std::cout << "Invalid input: please enter a number between 1-4. \n";
-			validSelection = false;
-			continue;
-		}
 	} while (!validSelection);
 
 	return selection;
