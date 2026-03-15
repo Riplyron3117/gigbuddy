@@ -10,6 +10,6 @@ class InputValidator
 		bool validateAge(const std::string& age, int& outAge) const;
 		bool validateIncome(const std::string& income, double& outIncome) const;
 		bool validateFilingStatus(const std::string& filingStatus, int& outFilingStatus) const;
-		bool validateDisplayChoice(const std::string& displayChoice, char& outDisplayChoice) const;
+		bool validateDisplayChoice(const std::string& displayChoice) const;
 };
 

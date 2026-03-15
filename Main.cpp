@@ -29,6 +29,8 @@ int main()
 	bob.setUserDisplayChoice(infoCollection.userDisplayChoice());
 
 	display.displayController(bob);
+
+	
 	
 
 	

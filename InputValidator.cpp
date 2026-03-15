@@ -164,8 +164,8 @@ bool InputValidator::validateFilingStatus(const std::string& filingStatus, int& 
 {
 	if (filingStatus.length() > 1) 	//adds check bounds to prevent out of range errors when validating input.
 	{
-		std::cout << "Invalid Input: Please enter a number between 1-4. \n";
-		
+		std::cout << ErrorMessages::invalidFilingStatus << std::endl;
+		return false;
 	}
 
 	for (size_t input_size = 0; input_size < filingStatus.size(); input_size++)
@@ -175,7 +175,7 @@ bool InputValidator::validateFilingStatus(const std::string& filingStatus, int& 
 
 		if (!std::isdigit(static_cast<unsigned char>(c)))
 		{
-			std::cout << "Invalid Input: Please enter a number between 1-4. \n";
+			std::cout << ErrorMessages::invalidFilingStatus << std::endl;
 			return false;
 		}
 	}
@@ -186,18 +186,51 @@ bool InputValidator::validateFilingStatus(const std::string& filingStatus, int& 
 	}
 	catch (const std::invalid_argument&)
 	{
-		std::cout << "Invalid Input: Please enter a number between 1-4. \n";
+		std::cout << ErrorMessages::invalidFilingStatus << std::endl;
 		return false;
 	}
 	catch (const std::out_of_range&)
 	{
-		std::cout << "Invalid Input: Please enter a number between 1-4. \n";
+		std::cout << ErrorMessages::invalidFilingStatus << std::endl;
 		return false;
 	}
 
 	if (outFilingStatus < 1 || outFilingStatus > 4)
 	{
-		std::cout << "Invalid input: please enter a number between 1-4. \n";
+		std::cout << ErrorMessages::invalidFilingStatus << std::endl;
 		return false;
 	}
+	return true;
+}
+
+bool InputValidator::validateDisplayChoice(const std::string& displayChoice) const
+{
+	if (displayChoice.length() > 1) //adds check bounds to prevent out of range errors when validating input.
+	{
+		std::cout << ErrorMessages::invalidDisplayChoice << std::endl;
+		return false;
+	}
+
+	//check for empty input
+	if (displayChoice.empty())
+	{
+		std::cout << ErrorMessages::invalidDisplayChoice << std::endl;
+		return false;
+	}
+
+	//check for whitespace
+	if (displayChoice.find_first_not_of(" \t") == std::string::npos)
+	{
+		std::cout << ErrorMessages::invalidDisplayChoice << std::endl;
+		return false;
+	}
+
+	char outDisplayChoice = displayChoice[0];
+	if (outDisplayChoice != 'Y' && outDisplayChoice != 'y' && outDisplayChoice != 'N' && outDisplayChoice != 'n')
+	{
+		std::cout << ErrorMessages::invalidDisplayChoice << std::endl;
+		return false;
+	}
+
+	return true;
 }

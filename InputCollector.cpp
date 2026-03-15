@@ -77,6 +77,7 @@ double InputCollector::collectIncome()
 int InputCollector::collectFilingStatus()
 {
 	std::string filingStatusSelection;
+	InputValidator filingStatusValidator;
 	int selection = 0;
 	bool validSelection = false;
 
@@ -89,6 +90,10 @@ int InputCollector::collectFilingStatus()
 			<< "4. Head of Household. \n"
 			<< "Please select your filing status by typing the corresponding number and pressing enter: ";
 		std::getline(std::cin, filingStatusSelection);
+
+		validSelection = filingStatusValidator.validateFilingStatus(filingStatusSelection, selection);
+
+		if (validSelection == true) break;
 		 
 	} while (!validSelection);
 
@@ -99,47 +104,20 @@ char InputCollector::userDisplayChoice()
 {
 	std::string userInput;
 	bool validChoice = false;
+	InputValidator displayChoiceValidator;
 
 	do
 	{
 		std::cout << "Would you like to display the results? (Y/N); " << std::endl;
 		std::getline(std::cin, userInput);
 
-		if (userInput.length() > 1) //adds check bounds to prevent out of range errors when validating input.
-		{
-			validChoice = false;
-			std::cout << "Invalid input: Please select Y for yes or N for no. " << std::endl;
-			continue;
-		}
+		validChoice = displayChoiceValidator.validateDisplayChoice(userInput);
 
-		//check for empty input
-		if (userInput.empty())
-		{
-			validChoice = false;
-			std::cout << "Invalid input : please select Y for yes or N for no. " << std::endl;
-			continue;
-		}
+		if (validChoice == true) break;
 
-		//check for whitespace
-		if (userInput.find_first_not_of(" \t") == std::string::npos)
-		{
-			validChoice = false;
-			std::cout << "Invalid input : please select Y for yes or N for no. " << std::endl;
-			continue;
-		}
-
-		char userChoice = userInput[0];
-		if (userChoice != 'Y' && userChoice != 'y' && userChoice != 'N' && userChoice != 'n')
-		{
-			validChoice = false;
-			std::cout << "Invalid input : please select Y for yes or N for no. " << std::endl;
-			continue;
-		}
-
-		validChoice = true;
-		return userChoice;
 
 	} while (!validChoice);
 
-	return ' ';
+		return validChoice;
+
 }
