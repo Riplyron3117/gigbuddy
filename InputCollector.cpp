@@ -118,6 +118,6 @@ char InputCollector::userDisplayChoice()
 
 	} while (!validChoice);
 
-		return validChoice;
+	return userInput[0];
 
 }
