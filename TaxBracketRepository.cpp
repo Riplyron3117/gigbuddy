@@ -1,5 +1,7 @@
 ﻿#include "TaxBracketRepository.h"
-#include <climits>
+#include <stdexcept>
+#include <string>
+#include <optional>
 
 TaxBracketRepository::TaxBracketRepository()
 {
@@ -15,7 +17,7 @@ void TaxBracketRepository::initializeFederalTaxBracketData()
 	federalFilingStatus[0].percentageRates[3] = { .24, 100526, 191950 };
 	federalFilingStatus[0].percentageRates[4] = { .32, 191951, 243725 };
 	federalFilingStatus[0].percentageRates[5] = { .35, 243726, 609350 };
-	federalFilingStatus[0].percentageRates[6] = { .37, 609351, INT_MAX };
+	federalFilingStatus[0].percentageRates[6] = { .37, 609351, std::nullopt };
 
 	federalFilingStatus[1].percentageRates[0] = { .10, 0 ,23200 };
 	federalFilingStatus[1].percentageRates[1] = { .12, 23201, 94300 };
@@ -23,7 +25,7 @@ void TaxBracketRepository::initializeFederalTaxBracketData()
 	federalFilingStatus[1].percentageRates[3] = { .24, 201051, 383900 };
 	federalFilingStatus[1].percentageRates[4] = { .32, 383901, 487450 };
 	federalFilingStatus[1].percentageRates[5] = { .35, 487451, 731200 };
-	federalFilingStatus[1].percentageRates[6] = { .37, 731201, INT_MAX };
+	federalFilingStatus[1].percentageRates[6] = { .37, 731201, std::nullopt };
 
 	federalFilingStatus[2].percentageRates[0] = { .10, 0 ,11600 };
 	federalFilingStatus[2].percentageRates[1] = { .12, 11601, 47150 };
@@ -31,7 +33,7 @@ void TaxBracketRepository::initializeFederalTaxBracketData()
 	federalFilingStatus[2].percentageRates[3] = { .24, 100526, 191950 };
 	federalFilingStatus[2].percentageRates[4] = { .32, 191951, 243725 };
 	federalFilingStatus[2].percentageRates[5] = { .35, 243726, 365600 };
-	federalFilingStatus[2].percentageRates[6] = { .37, 365601, INT_MAX };
+	federalFilingStatus[2].percentageRates[6] = { .37, 365601, std::nullopt };
 
 	federalFilingStatus[3].percentageRates[0] = { .10, 0 ,16550 };
 	federalFilingStatus[3].percentageRates[1] = { .12, 16551, 63100 };
@@ -39,7 +41,7 @@ void TaxBracketRepository::initializeFederalTaxBracketData()
 	federalFilingStatus[3].percentageRates[3] = { .24, 100501, 191950 };
 	federalFilingStatus[3].percentageRates[4] = { .32, 191951, 243700 };
 	federalFilingStatus[3].percentageRates[5] = { .35, 243701, 609350 };
-	federalFilingStatus[3].percentageRates[6] = { .37, 609351, INT_MAX };
+	federalFilingStatus[3].percentageRates[6] = { .37, 609351, std::nullopt };
 }
 
 void TaxBracketRepository::initializeStateTaxBracketData()
@@ -56,6 +58,10 @@ void TaxBracketRepository::initializeStateTaxBracketData()
 
 const TaxBracketRepository::FederalTaxBrackets& TaxBracketRepository::getFederalTaxBrackets(int filingStatusIndex) const
 {
+	if (filingStatusIndex < 0 || filingStatusIndex >= 4)
+	{
+		throw std::out_of_range("Filing status index out of range " + std::to_string(filingStatusIndex)); // Invalid filing status index.
+	}
 	return federalFilingStatus[filingStatusIndex];
 }
 

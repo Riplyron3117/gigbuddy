@@ -11,7 +11,9 @@ public:
 
 	int collectAge();
 
-	float collectIncome();
+	double collectIncome();
 
 	int collectFilingStatus();
+
+	char userDisplayChoice();
 };

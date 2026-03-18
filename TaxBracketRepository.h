@@ -2,7 +2,9 @@
 #ifndef TAXBRACKETREPOSITORY_H
 #define TAXBRACKETREPOSITORY_H	
 
+#include <optional>
 #include <array>
+
 class TaxBracketRepository
 {
 public:
@@ -10,8 +12,8 @@ public:
 	struct FederalTaxRates
 	{
 		double rate{};
-		int minIncome{};
-		int maxIncome{};
+		double minIncome{};
+		std::optional<double>maxIncome{};
 	};
 
 	struct FederalTaxBrackets
@@ -25,7 +27,7 @@ public:
 	{
 		double rate;
 		double minIncome;
-		double maxIncome;
+		std::optional<double>maxIncome;
 	};
 	const struct StateTaxBrackets
 	{
