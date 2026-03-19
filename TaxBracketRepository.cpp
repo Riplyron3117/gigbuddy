@@ -1,4 +1,6 @@
 ﻿#include "TaxBracketRepository.h"
+#include <nlohmann/json.hpp>
+#include <fstream>
 #include <stdexcept>
 #include <string>
 #include <optional>
@@ -11,37 +13,35 @@ TaxBracketRepository::TaxBracketRepository()
 
 void TaxBracketRepository::initializeFederalTaxBracketData()
 {
-	federalFilingStatus[0].percentageRates[0] = { .10, 0 ,11600 };
-	federalFilingStatus[0].percentageRates[1] = { .12, 11601, 47150 };
-	federalFilingStatus[0].percentageRates[2] = { .22, 47151, 100525 };
-	federalFilingStatus[0].percentageRates[3] = { .24, 100526, 191950 };
-	federalFilingStatus[0].percentageRates[4] = { .32, 191951, 243725 };
-	federalFilingStatus[0].percentageRates[5] = { .35, 243726, 609350 };
-	federalFilingStatus[0].percentageRates[6] = { .37, 609351, std::nullopt };
+	std::ifstream fedTaxFile("tax_brackets.json");
+	if (!fedTaxFile.is_open())
+	{
+		throw std::runtime_error("Could not open the file");
+	}
 
-	federalFilingStatus[1].percentageRates[0] = { .10, 0 ,23200 };
-	federalFilingStatus[1].percentageRates[1] = { .12, 23201, 94300 };
-	federalFilingStatus[1].percentageRates[2] = { .22, 94301, 201050 };
-	federalFilingStatus[1].percentageRates[3] = { .24, 201051, 383900 };
-	federalFilingStatus[1].percentageRates[4] = { .32, 383901, 487450 };
-	federalFilingStatus[1].percentageRates[5] = { .35, 487451, 731200 };
-	federalFilingStatus[1].percentageRates[6] = { .37, 731201, std::nullopt };
+	nlohmann::json fedTaxJson = nlohmann::json::parse(fedTaxFile);
 
-	federalFilingStatus[2].percentageRates[0] = { .10, 0 ,11600 };
-	federalFilingStatus[2].percentageRates[1] = { .12, 11601, 47150 };
-	federalFilingStatus[2].percentageRates[2] = { .22, 47151, 100525 };
-	federalFilingStatus[2].percentageRates[3] = { .24, 100526, 191950 };
-	federalFilingStatus[2].percentageRates[4] = { .32, 191951, 243725 };
-	federalFilingStatus[2].percentageRates[5] = { .35, 243726, 365600 };
-	federalFilingStatus[2].percentageRates[6] = { .37, 365601, std::nullopt };
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 7; j++)
+		{
+			std::optional<double> max;
+			if (fedTaxJson["federal"][i]["brackets"][j]["max"].is_null())
+			{
+				max = std::nullopt;
+			}
+			else
+			{
+				max = fedTaxJson["federal"][i]["brackets"][j]["max"].get<double>();
+			}
+		
+			federalFilingStatus[i].percentageRates[j] = { fedTaxJson["federal"][i]["brackets"][j]["rate"],
+														  fedTaxJson["federal"][i]["brackets"][j]["min"],
+														  max};
+		}
 
-	federalFilingStatus[3].percentageRates[0] = { .10, 0 ,16550 };
-	federalFilingStatus[3].percentageRates[1] = { .12, 16551, 63100 };
-	federalFilingStatus[3].percentageRates[2] = { .22, 63101, 100500 };
-	federalFilingStatus[3].percentageRates[3] = { .24, 100501, 191950 };
-	federalFilingStatus[3].percentageRates[4] = { .32, 191951, 243700 };
-	federalFilingStatus[3].percentageRates[5] = { .35, 243701, 609350 };
-	federalFilingStatus[3].percentageRates[6] = { .37, 609351, std::nullopt };
+	}
+
 }
 
 void TaxBracketRepository::initializeStateTaxBracketData()
