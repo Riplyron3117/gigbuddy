@@ -7,6 +7,8 @@
 class User
 {
 public:
+	User();
+
 	enum class IncomePeriod
 	{
 		STOP,
@@ -46,16 +48,17 @@ private:
 
 public:
 	//getters for user data
-	User();
 
 		
 	std::string getName() const { return name_; }
-	 
+	
+	std::string getState() const { return state_; }
+
+	IncomePeriod getIncomeFrequency() const { return incomeFrequency_; }
+
 	char getUserDisplayChoice() const { return userDisplayChoice_; }
 
 	int getAge() const { return age_; }
-
-	IncomePeriod getIncomeFrequency() const { return incomeFrequency_; }
 
 	int getFilingStatus() const { return filingStatus_; }
 
@@ -92,6 +95,8 @@ public:
 	double getSafeSpendingAmount() const { return safeSpendingAmount_; }
 
 	//setters for user data
+	void setState(const std::string& state) { state_ = state; }
+
 	void setName(const std::string& name) { name_ = name; }
 
 	void setAge(int age) { age_ = age; }
@@ -111,9 +116,34 @@ public:
 	void setDaysPerWeek(int days) { daysPerWeek_ = days; }
 
 	void setIncomeAmount(double income) { incomeAmount_ = income; }
+	
+	void setBusinessExpense(double expense) { businessExpenses_ = expense; }
 
+	void setNetSEIncome(double SeIncome) { netSEIncome_ = SeIncome; }
 
+	void setStandardDeduction(double deduction) { standardDeduction_ = deduction; }
+
+	void setSeTax(double seTax) { seTax_ = seTax; }
+
+	void setSeDeduction(double deDeduction) { seDeduction_ = deDeduction; }
+
+	void setFederalTaxableIncome(double federalTaxableIncome) { federalTaxableIncome_ = federalTaxableIncome; }
+
+	void setFederalIncomeTax(double federalIncomeTax) { federalIncomeTax_ = federalIncomeTax; }
+
+	void setStateTax(double stateTax) { stateTax_ = stateTax; }
+
+	void setTotalTaxOwed(double totalTaxOwed) { totalTaxOwed_ = totalTaxOwed; }
+
+	void setQuarterlyPayments(double quarterlyPayments) { quarterlyPayment_ = quarterlyPayments; }
+
+	void setSafeSpendingAmount(double safeSpendingAmount) {safeSpendingAmount_ = safeSpendingAmount; }
 
 };
+	
 #endif //!User_h
+
+
+
+
 
