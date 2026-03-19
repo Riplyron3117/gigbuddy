@@ -12,3 +12,5 @@ const std::string ErrorMessages::invalidIncome = "Invalid Input: Please enter a 
 const std::string ErrorMessages::invalidFilingStatus = "Invalid Input: Please enter a valid filing status by selecting the corresponding number from the list.";
 
 const std::string ErrorMessages::invalidDisplayChoice = "Invalid Input: Please enter Y for yes or N for no.";
+
+const std::string ErrorMessages::fileNotFound = "Could not open the file";

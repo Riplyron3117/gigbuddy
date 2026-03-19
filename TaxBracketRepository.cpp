@@ -1,4 +1,5 @@
 ﻿#include "TaxBracketRepository.h"
+#include "ErrorMessages.h"
 #include <nlohmann/json.hpp>
 #include <fstream>
 #include <stdexcept>
@@ -16,7 +17,7 @@ void TaxBracketRepository::initializeFederalTaxBracketData()
 	std::ifstream fedTaxFile("tax_brackets.json");
 	if (!fedTaxFile.is_open())
 	{
-		throw std::runtime_error("Could not open the file");
+		throw std::runtime_error(ErrorMessages::fileNotFound);
 	}
 
 	nlohmann::json fedTaxJson = nlohmann::json::parse(fedTaxFile);
@@ -25,23 +26,15 @@ void TaxBracketRepository::initializeFederalTaxBracketData()
 	{
 		for (int j = 0; j < 7; j++)
 		{
-			std::optional<double> max;
-			if (fedTaxJson["federal"][i]["brackets"][j]["max"].is_null())
-			{
-				max = std::nullopt;
-			}
-			else
-			{
-				max = fedTaxJson["federal"][i]["brackets"][j]["max"].get<double>();
-			}
-		
-			federalFilingStatus[i].percentageRates[j] = { fedTaxJson["federal"][i]["brackets"][j]["rate"],
-														  fedTaxJson["federal"][i]["brackets"][j]["min"],
-														  max};
+			const auto& bracket = fedTaxJson["federal"][i]["brackets"][j];
+
+			std::optional<double> max = bracket["max"].is_null()
+
+				? std::nullopt : std::optional<double>(bracket["max"].get<double>());
+			federalFilingStatus[i].percentageRates[j] = { bracket["rate"], bracket["min"], max };
 		}
 
 	}
-
 }
 
 void TaxBracketRepository::initializeStateTaxBracketData()
