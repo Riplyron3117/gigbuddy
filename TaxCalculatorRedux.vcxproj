@@ -108,6 +108,9 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(ProjectDir)tax_brackets.json" "$(OutDir)tax_brackets.json"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -126,17 +129,18 @@
   <ItemGroup>
     <ClCompile Include="DisplayService.cpp" />
     <ClCompile Include="ErrorMessages.cpp" />
+    <ClCompile Include="IncomeNormalizer.cpp" />
     <ClCompile Include="InputCollector.cpp" />
     <ClCompile Include="InputValidator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="TaxBracketRepository.cpp" />
     <ClCompile Include="TaxCalculator.cpp" />
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisplayService.h" />
     <ClInclude Include="ErrorMessages.h" />
+    <ClInclude Include="IncomeNormalizer.h" />
     <ClInclude Include="InputCollector.h" />
     <ClInclude Include="InputValidator.h" />
     <ClInclude Include="TaxBracketRepository.h" />

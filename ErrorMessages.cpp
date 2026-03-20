@@ -14,3 +14,5 @@ const std::string ErrorMessages::invalidFilingStatus = "Invalid Input: Please en
 const std::string ErrorMessages::invalidDisplayChoice = "Invalid Input: Please enter Y for yes or N for no.";
 
 const std::string ErrorMessages::fileNotFound = "Could not open the file";
+
+const std::string ErrorMessages::invalidPayFrequency = "Invalid Input: Please select 1. STOP, 2. DAY, 3. WEEK, 4. MONTH ";

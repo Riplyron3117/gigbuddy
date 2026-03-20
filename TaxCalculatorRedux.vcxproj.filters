@@ -39,7 +39,7 @@
     <ClCompile Include="InputValidator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
+    <ClCompile Include="IncomeNormalizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,5 +65,12 @@
     <ClInclude Include="InputValidator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IncomeNormalizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="tax_brackets.json" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,4 @@
-#pragma once
-#ifndef TAXBRACKETREPOSITORY_H
-#define TAXBRACKETREPOSITORY_H	
+#pragma once	
 
 #include <optional>
 #include <array>
@@ -46,6 +44,4 @@ public:
 	const StateTaxBrackets& getStateTaxBrackets(int filingStatusIndex) const;
 
 };
-
-#endif // TAXBRACKETREPOSITORY_H
 

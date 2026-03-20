@@ -1,11 +1,9 @@
-#ifndef TAXCALCULATOR_H
-#define TAXCALCULATOR_H
+#pragma once
 
 #include <algorithm>
 #include <climits>
 #include "User.h"
 #include "TaxBracketRepository.h"
-#pragma once
 class TaxCalculator
 {
 public:
@@ -19,5 +17,5 @@ private:
 
 	double calculateTaxForBracket(int filingStatusIndex, double income, const TaxBracketRepository::FederalTaxBrackets& brackets);
 };
-#endif //!TAXCALCULATOR_H
+
 

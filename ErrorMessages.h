@@ -12,5 +12,6 @@ public:
 	static const std::string invalidFilingStatus;
 	static const std::string invalidDisplayChoice;
 	static const std::string fileNotFound;
+	static const std::string invalidPayFrequency;
 };
 
