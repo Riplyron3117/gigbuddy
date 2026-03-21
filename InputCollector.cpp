@@ -1,5 +1,6 @@
 #include "InputCollector.h"
 #include "InputValidator.h"
+#include "Strings.h"
 #include <string>
 #include <iostream>
 #include <cctype>
@@ -19,7 +20,7 @@ std::string InputCollector::collectName()
 
     do		//do-while loop collects users input and validates. 
 	{
-		std::cout << "Please Enter your Full Name: ";
+		std::cout << Prompts::namePrompt;
 		std::getline(std::cin, userName);
 
 		userNameValidation = nameValidator.validateName(userName);
@@ -41,7 +42,7 @@ int InputCollector::collectAge()
 
 	do		//do-while collects user input and validates before value is returned.
 	{
-		std::cout << "Please enter a Valid age over 18 years old:  ";
+		std::cout << Prompts::agePrompt;
 		std::getline(std::cin, inputAge);
 
 		ageValidation = ageValidator.validateAge(inputAge, age);
@@ -62,7 +63,7 @@ double InputCollector::collectIncome()
 
 	do
 	{
-		std::cout << "Please enter your annual income: ";
+		std::cout << Prompts::incomePrompt;
 		std::getline(std::cin, inputAnnualIncome);
 
 		incomeValidation = incomeValidator.validateIncome(inputAnnualIncome, annualIncome);
@@ -83,12 +84,7 @@ int InputCollector::collectFilingStatus()
 
 	do
 	{
-		std::cout
-			<< "1. Single. \n"
-			<< "2. Married Filing Jointly. \n"
-			<< "3. Married Filing Seperate. \n"
-			<< "4. Head of Household. \n"
-			<< "Please select your filing status by typing the corresponding number and pressing enter: ";
+		std::cout << Prompts::filingStatusPrompt;
 		std::getline(std::cin, filingStatusSelection);
 
 		validSelection = filingStatusValidator.validateFilingStatus(filingStatusSelection, selection);
@@ -100,6 +96,8 @@ int InputCollector::collectFilingStatus()
 	return selection;
 }
 
+//prompts the user on whether they want to display results or not.
+//collects and validates the users choice before displaying results.
 char InputCollector::userDisplayChoice()
 {
 	std::string userInput;
@@ -108,7 +106,7 @@ char InputCollector::userDisplayChoice()
 
 	do
 	{
-		std::cout << "Would you like to display the results? (Y/N); " << std::endl;
+		std::cout << Prompts::displayChoicePrompt;
 		std::getline(std::cin, userInput);
 
 		validChoice = displayChoiceValidator.validateDisplayChoice(userInput);
@@ -119,5 +117,5 @@ char InputCollector::userDisplayChoice()
 	} while (!validChoice);
 
 	return userInput[0];
-
 }
+

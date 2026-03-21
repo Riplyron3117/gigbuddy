@@ -1,6 +1,6 @@
 
 #include "IncomeNormalizer.h"
-#include "ErrorMessages.h"
+#include "strings.h"
 #include <stdexcept>
 
 IncomeNormalizer::IncomeNormalizer() {};
@@ -34,7 +34,7 @@ double IncomeNormalizer::normalizeIncome(const User& user)
 			return (user.getIncomeAmount() * 12);
 		}
 
-		default: throw std::invalid_argument(ErrorMessages::invalidPayFrequency);
+		default: throw std::invalid_argument(std::string(ErrorMessages::invalidPayFrequency));
 	}
 
 }

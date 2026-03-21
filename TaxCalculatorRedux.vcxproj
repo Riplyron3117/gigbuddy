@@ -128,7 +128,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DisplayService.cpp" />
-    <ClCompile Include="ErrorMessages.cpp" />
     <ClCompile Include="IncomeNormalizer.cpp" />
     <ClCompile Include="InputCollector.cpp" />
     <ClCompile Include="InputValidator.cpp" />
@@ -139,10 +138,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisplayService.h" />
-    <ClInclude Include="ErrorMessages.h" />
     <ClInclude Include="IncomeNormalizer.h" />
     <ClInclude Include="InputCollector.h" />
     <ClInclude Include="InputValidator.h" />
+    <ClInclude Include="Strings.h" />
     <ClInclude Include="TaxBracketRepository.h" />
     <ClInclude Include="TaxCalculator.h" />
     <ClInclude Include="User.h" />
