@@ -15,6 +15,12 @@ namespace Prompts
 														   "Please select your filing status by typing the corresponding number and pressing enter: ";
 
 	inline constexpr std::string_view displayChoicePrompt = "Would you like to display the results? (Y/N); ";
+
+	inline constexpr std::string_view payFrequencyPrompt = "Please select from the following pay feqeuency choices: \n"
+													     	"1. Per Stop: \n"
+															"2. Per Day: \n"
+															"3. Per Week: \n"
+															"4. Per Month: \n";
 }
 
 namespace ErrorMessages

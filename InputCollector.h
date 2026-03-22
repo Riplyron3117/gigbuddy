@@ -1,5 +1,7 @@
 #pragma once
+#include "User.h"
 #include <string>
+
 
 class InputCollector
 {
@@ -16,4 +18,6 @@ public:
 	int collectFilingStatus();
 
 	char userDisplayChoice();
+
+	User::IncomePeriod payFrequency();
 };

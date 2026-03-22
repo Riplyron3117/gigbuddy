@@ -234,3 +234,53 @@ bool InputValidator::validateDisplayChoice(const std::string& displayChoice) con
 
 	return true;
 }
+
+bool InputValidator::validateFrequencyChoice(const std::string& inFrequencyChoice, int& outFrequencyChoice) const
+{
+	if (inFrequencyChoice.length() > 1)
+	{
+		std::cout << ErrorMessages::invalidPayFrequency << std::endl;
+		return false;
+	}
+
+	if (inFrequencyChoice.empty())
+	{
+		std::cout << ErrorMessages::invalidPayFrequency << std::endl;
+		return false;
+	}
+
+	for (size_t inputSize = 0; inputSize < inFrequencyChoice.size(); inputSize++)
+	{
+		char c = inFrequencyChoice[inputSize];
+
+		if (!std::isdigit(static_cast<unsigned char>(c)))
+		{
+			std::cout << ErrorMessages::invalidPayFrequency << std::endl;
+			return false;
+		}
+
+	}
+
+	try 
+	{
+		outFrequencyChoice = std::stoi(inFrequencyChoice);
+	}
+	catch (std::invalid_argument&)
+	{
+		std::cout << ErrorMessages::invalidPayFrequency << std::endl;
+		return false;
+	}
+	catch (std::out_of_range&)
+	{
+		std::cout << ErrorMessages::invalidPayFrequency << std::endl;
+		return false;
+	}
+
+	if (outFrequencyChoice < 1 || outFrequencyChoice > 4)
+	{
+		std::cout << ErrorMessages::invalidPayFrequency << std::endl;
+		return false;
+	}
+
+	return true;
+}

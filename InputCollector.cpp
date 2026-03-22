@@ -119,3 +119,24 @@ char InputCollector::userDisplayChoice()
 	return userInput[0];
 }
 
+User::IncomePeriod InputCollector::payFrequency()
+{
+	std::string frequencySelection;
+	int finalSelection = 0;
+	bool validInput = false;
+	InputValidator frequencyChoiceValidator;
+
+	do
+	{
+		std::cout << Prompts::payFrequencyPrompt;
+		std::getline(std::cin, frequencySelection);
+
+		validInput = frequencyChoiceValidator.validateFrequencyChoice(frequencySelection, finalSelection);
+
+		if (validInput == true) break;
+
+	} while (!validInput);
+	
+	return static_cast<User::IncomePeriod>(finalSelection);
+}
+

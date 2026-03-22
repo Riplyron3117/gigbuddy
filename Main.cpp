@@ -22,6 +22,7 @@ int main()
 		bob.setAge(infoCollection.collectAge());
 		bob.setAnnualIncome(infoCollection.collectIncome());
 		bob.setFilingStatus(infoCollection.collectFilingStatus());
+		bob.setIncomeFrequency(infoCollection.payFrequency());
 
 		//calculate federal tax and store result
 		// Note: This line chains two operations:
