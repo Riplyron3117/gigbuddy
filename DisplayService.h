@@ -23,6 +23,8 @@ private:
 
 	double calculateAndDisplayEffectiveTaxRate(const User& user) const;
 
+	std::string frequencyConversionHelper(User::IncomePeriod userSelection) const;
+
 
 	
 };

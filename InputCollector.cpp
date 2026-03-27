@@ -137,6 +137,6 @@ User::IncomePeriod InputCollector::payFrequency()
 
 	} while (!validInput);
 	
-	return static_cast<User::IncomePeriod>(finalSelection);
+	return static_cast<User::IncomePeriod>(finalSelection - 1);
 }
 

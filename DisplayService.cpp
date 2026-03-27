@@ -24,10 +24,12 @@ std::string DisplayService::getFilingStatusName(int filingStatus) const
 
 void DisplayService::displayUserInformation(const User& user) const
 {
+	
 	std::cout << "Name: " << user.getName() << std::endl;
 	std::cout << "Age: " << user.getAge() << std::endl;
 	std::cout << "Annual Income: $" << user.getAnnualIncome() << std::endl;
 	std::cout << "Filing Status: " << getFilingStatusName(user.getFilingStatus()) << std::endl;
+	std::cout << "Pay Frequency: " << frequencyConversionHelper(user.getIncomeFrequency()) << std::endl;
 	std::cout << "Calculated Federal Tax: $" << user.getTaxableIncome() << std::endl;
 }
 
@@ -75,6 +77,23 @@ void DisplayService::displayController(const User& displayChoice) const
 	else
 	{
 		std::cout << "Invalid display choice. Results will not be displayed. " << std::endl;
+	}
+
+}
+
+std::string DisplayService::frequencyConversionHelper(User::IncomePeriod userSelection) const
+{
+	switch (userSelection)
+	{
+		case User::IncomePeriod::STOP: 
+			{
+			return "STOP";
+			}
+
+		case User::IncomePeriod::DAY: 
+			{
+			return "DAY";
+			}
 	}
 
 }
