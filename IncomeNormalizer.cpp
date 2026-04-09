@@ -1,5 +1,6 @@
 
 #include "IncomeNormalizer.h"
+#include "InputCollector.h"
 #include "strings.h"
 #include <stdexcept>
 
@@ -7,12 +8,15 @@ IncomeNormalizer::IncomeNormalizer() {};
 
 double IncomeNormalizer::normalizeIncome(const User& user)
 {
+	InputCollector userDailyIncome;
 	double dailyIncome = 0.0;
 
 	switch (user.getIncomeFrequency())
 	{
 		case User::IncomePeriod::STOP :
 		{
+			userDailyIncome.collectedDailyIncome();
+
 			dailyIncome = (user.getIncomeAmount() * user.getStopsPerDay());
 
 			return (dailyIncome * user.getDaysPerWeek()) * 52;

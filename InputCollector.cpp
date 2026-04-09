@@ -140,3 +140,18 @@ User::IncomePeriod InputCollector::payFrequency()
 	return static_cast<User::IncomePeriod>(finalSelection - 1);
 }
 
+double InputCollector::collectedDailyIncome()
+{
+	std::string inputDailyIncome;
+	double dailyIncome = 0.0;
+	bool dailyIncomeValidation = false;
+	InputValidator dailyIncomeValidator;
+
+	std::cout << Prompts::dailyIncomePrompt;
+	std::getline(std::cin, inputDailyIncome);
+
+	dailyIncome = std::stod(inputDailyIncome);
+
+	return dailyIncome;
+}
+

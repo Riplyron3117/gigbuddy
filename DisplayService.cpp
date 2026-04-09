@@ -29,7 +29,7 @@ void DisplayService::displayUserInformation(const User& user) const
 	std::cout << "Age: " << user.getAge() << std::endl;
 	std::cout << "Annual Income: $" << user.getAnnualIncome() << std::endl;
 	std::cout << "Filing Status: " << getFilingStatusName(user.getFilingStatus()) << std::endl;
-	std::cout << "Pay Frequency: " << frequencyConversionHelper(user.getIncomeFrequency()) << std::endl;
+	std::cout << "Pay Frequency: " << frequencyConversionHelper(user.getIncomeFrequency()) <<  std::endl;
 	std::cout << "Calculated Federal Tax: $" << user.getTaxableIncome() << std::endl;
 }
 
@@ -93,6 +93,16 @@ std::string DisplayService::frequencyConversionHelper(User::IncomePeriod userSel
 		case User::IncomePeriod::DAY: 
 			{
 			return "DAY";
+			}	
+
+		case User::IncomePeriod::WEEK:
+			{
+				return "WEEK";
+			}
+
+		case User::IncomePeriod::MONTH:
+			{
+				return "MONTH";
 			}
 	}
 

@@ -15,6 +15,10 @@ public:
 
 	double collectIncome();
 
+	double collectedDailyIncome();
+
+	int collectDaysPerWeek();
+
 	int collectFilingStatus();
 
 	char userDisplayChoice();

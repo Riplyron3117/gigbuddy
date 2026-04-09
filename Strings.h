@@ -8,6 +8,7 @@ namespace Prompts
 	inline constexpr std::string_view namePrompt = "Please Enter your Full Name: ";
 	inline constexpr std::string_view agePrompt = "Please enter a Valid age over 18 years old: ";
 	inline constexpr std::string_view incomePrompt = "Please enter your annual income: ";
+	inline constexpr std::string_view dailyIncomePrompt = "Please enter your income for the day: ";
 	inline constexpr std::string_view filingStatusPrompt = "1. Single. \n"
 														   "2. Married Filing Jointly. \n"
 														   "3. Married Filing Seperate. \n"
