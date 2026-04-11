@@ -140,6 +140,7 @@
     <ClInclude Include="DisplayService.h" />
     <ClInclude Include="IncomeNormalizer.h" />
     <ClInclude Include="InputCollector.h" />
+    <ClInclude Include="InputLoopHelper.h" />
     <ClInclude Include="InputValidator.h" />
     <ClInclude Include="Strings.h" />
     <ClInclude Include="TaxBracketRepository.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".github\copilot-instructions.md" />
     <None Include="packages.config" />
     <None Include="tax_brackets.json" />
   </ItemGroup>

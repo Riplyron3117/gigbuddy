@@ -15,7 +15,7 @@ double IncomeNormalizer::normalizeIncome(const User& user)
 	{
 		case User::IncomePeriod::STOP :
 		{
-			userDailyIncome.collectedDailyIncome();
+			userDailyIncome.collectDailyIncome();
 
 			dailyIncome = (user.getIncomeAmount() * user.getStopsPerDay());
 

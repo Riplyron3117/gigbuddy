@@ -20,6 +20,8 @@ int main()
 
 		bob.setName(infoCollection.collectName());
 		bob.setAge(infoCollection.collectAge());
+		bob.setIncomeAmount(infoCollection.collectDailyIncome());
+		std::cout << bob.getIncomeAmount();
 		bob.setIncomeFrequency(infoCollection.payFrequency());
 		bob.setAnnualIncome(infoCollection.collectIncome());
 		bob.setFilingStatus(infoCollection.collectFilingStatus());

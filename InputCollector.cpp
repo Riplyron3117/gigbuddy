@@ -126,10 +126,10 @@ User::IncomePeriod InputCollector::payFrequency()
 	bool validInput = false;
 	InputValidator frequencyChoiceValidator;
 
-	do
-	{
 		std::cout << Prompts::payFrequencyPrompt;
 		std::getline(std::cin, frequencySelection);
+	do
+	{
 
 		validInput = frequencyChoiceValidator.validateFrequencyChoice(frequencySelection, finalSelection);
 
@@ -140,17 +140,23 @@ User::IncomePeriod InputCollector::payFrequency()
 	return static_cast<User::IncomePeriod>(finalSelection - 1);
 }
 
-double InputCollector::collectedDailyIncome()
+double InputCollector::collectDailyIncome()
 {
 	std::string inputDailyIncome;
 	double dailyIncome = 0.0;
 	bool dailyIncomeValidation = false;
 	InputValidator dailyIncomeValidator;
 
-	std::cout << Prompts::dailyIncomePrompt;
-	std::getline(std::cin, inputDailyIncome);
+	do
+	{
+		std::cout << Prompts::dailyIncomePrompt;
+		std::getline(std::cin, inputDailyIncome);
 
-	dailyIncome = std::stod(inputDailyIncome);
+		dailyIncomeValidation = dailyIncomeValidator.validateIncome(inputDailyIncome, dailyIncome);
+
+		if (dailyIncomeValidation == true) break;
+	
+	} while (!dailyIncomeValidation);
 
 	return dailyIncome;
 }

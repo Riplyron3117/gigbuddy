@@ -65,9 +65,13 @@
     <ClInclude Include="Strings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InputLoopHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="tax_brackets.json" />
+    <None Include=".github\copilot-instructions.md" />
   </ItemGroup>
 </Project>

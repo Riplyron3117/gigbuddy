@@ -15,7 +15,7 @@ public:
 
 	double collectIncome();
 
-	double collectedDailyIncome();
+	double collectDailyIncome();
 
 	int collectDaysPerWeek();
 
