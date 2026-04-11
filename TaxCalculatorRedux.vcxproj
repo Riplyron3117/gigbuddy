@@ -148,7 +148,6 @@
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include=".github\copilot-instructions.md" />
     <None Include="packages.config" />
     <None Include="tax_brackets.json" />
   </ItemGroup>
