@@ -12,7 +12,7 @@ InputType inputLoopLogic(Reader input, Validator validation)
 			std::string rawInput = input();
 			isValid = validation(rawInput);
 			if (isValid == true) break;
-		} while (!isValid)
+		} while (!isValid);
 
 		return result;
 }

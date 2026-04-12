@@ -1,5 +1,6 @@
 #include "InputCollector.h"
 #include "InputValidator.h"
+#include "InputLoopHelper.h"
 #include "Strings.h"
 #include <string>
 #include <iostream>
@@ -14,22 +15,23 @@ InputCollector::InputCollector() {}
 
 std::string InputCollector::collectName()
 {
-    std::string userName;
-    bool userNameValidation = false;
-	InputValidator nameValidator;
+	auto userNameCollection = []() 
+		{
+			std::string userName;
+			std::cout << Prompts::namePrompt;
+			std::getline(cin, userName);
+			return userName;
+		};
 
-    do		//do-while loop collects users input and validates. 
-	{
-		std::cout << Prompts::namePrompt;
-		std::getline(std::cin, userName);
+	auto userNameValidation = [](std::string userName)
+		{
+			InputValidator validatedName;
+			bool nameValidator = false;
+			nameValidator = validatedName.validateName(userName);
+			return nameValidator;
+		};
 
-		userNameValidation = nameValidator.validateName(userName);
-
-		if (userNameValidation == true) break;
-
-	} while (userNameValidation == false);
-
-	return userName;
+	return inputLoopLogic<std::string>(userNameCollection, userNameValidation);
 }
 
 //collectAge() collects users Age and Validates input
