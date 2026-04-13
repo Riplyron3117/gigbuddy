@@ -7,10 +7,9 @@ class InputCollector
 {
 public:
 
-	InputCollector();
+	InputCollector(); //Constructor
 
 	std::string collectName();
-
 	int collectAge();
 
 	double collectIncome();

@@ -6,6 +6,7 @@
 
 InputValidator::InputValidator() {}
 
+//validateName() validates user's input for name
 bool InputValidator::validateName(const std::string& name) const
 {
 	if (name.empty()) //checks for empty input
@@ -24,7 +25,7 @@ bool InputValidator::validateName(const std::string& name) const
 	bool hasAlpha = false; //checks for at least one alpha character
 
 	for (char c : name)		//iterates through Input checking for invalid characters.
-	{
+	{	//checks if input is not an alpha or space.
 		if (!std::isalpha(static_cast<unsigned char>(c)) && !std::isspace(static_cast<unsigned char>(c)))
 		{
 			std::cout << ErrorMessages::invalidName << std::endl;
@@ -45,7 +46,7 @@ bool InputValidator::validateName(const std::string& name) const
 
 	return true;
 }
-
+//validateAge() validates user's age
 bool InputValidator::validateAge(const std::string& age, int& outAge) const
 {
 	if (age.find(' ') != std::string::npos)	//checks for spaces in input
@@ -85,7 +86,7 @@ bool InputValidator::validateAge(const std::string& age, int& outAge) const
 		return false;
 	}
 
-	if (outAge < 18 || outAge > 120)			//Validates age
+	if (outAge < 18 || outAge > 120)			//Validates age is between 18-120
 	{
 		std::cout << ErrorMessages::invalidAge << std::endl;
 		return false;
@@ -93,7 +94,7 @@ bool InputValidator::validateAge(const std::string& age, int& outAge) const
 
 	return true;
 }
-
+//validatesIncome validates the user's income (used for all income types)
 bool InputValidator::validateIncome(const std::string& income, double& outIncome) const
 {
 	bool decimalSeen = false;
@@ -159,7 +160,7 @@ bool InputValidator::validateIncome(const std::string& income, double& outIncome
 	}
 	return true;
 }
-
+//validateFilingStatus validates the filing status choice of the user.
 bool InputValidator::validateFilingStatus(const std::string& filingStatus, int& outFilingStatus) const
 {
 	if (filingStatus.length() > 1) 	//adds check bounds to prevent out of range errors when validating input.

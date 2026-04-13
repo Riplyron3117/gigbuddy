@@ -8,13 +8,14 @@
 
 using namespace std;
 
+//Constructor
 InputCollector::InputCollector() {}
 
 
 //collectName() collects user's name as input
-
+//Utilizes reader and validation lambdas for prompting, taking input, validating input and assigning.
 std::string InputCollector::collectName()
-{
+{	//reader
 	auto userNameCollection = []() 
 		{
 			std::string userName;
@@ -22,34 +23,34 @@ std::string InputCollector::collectName()
 			std::getline(cin, userName);
 			return userName;
 		};
-
+	//validator takes raw input and outputs final, validated input
 	auto userNameValidation = [](std::string userName, std::string& outName)
 		{
 			InputValidator validatedName;
 			bool nameValidator = false;
 			nameValidator = validatedName.validateName(userName);
 			if (nameValidator)
-			{
+			{   //stores final output in outName is validation comes back true.
 				outName = userName;
 			}
 			return nameValidator;
 		};
-	
+	//InputLoopHelper calls reader and validator. Returns final value.
 	return inputLoopLogic<std::string>(userNameCollection, userNameValidation);;
 }
 
 //collectAge() collects users Age and Validates input
 int InputCollector::collectAge()
 {
-
+	//reader
 	auto userAgeCollection = []()
 		{
-			std::string inputAge;	//initial string variable for checking for spaces, alpha characters, and symbols.
+			std::string inputAge;	
 			std::cout << Prompts::agePrompt;
 			std::getline(std::cin, inputAge);
 			return inputAge;
 		};
-
+	//validator
 	auto userAgeValidation = [](std::string& inputAge, int& outPutAge)
 		{
 			InputValidator ageValidator;
@@ -60,7 +61,7 @@ int InputCollector::collectAge()
 	
 	return inputLoopLogic<int>(userAgeCollection, userAgeValidation);
 }
-
+//Collects and validates annual income of user.
 double InputCollector::collectIncome()
 {
 
@@ -82,7 +83,7 @@ double InputCollector::collectIncome()
 
 	return inputLoopLogic<double>(userCollectAnnualIncome, userValidateAnnualIncome);
 }
-
+//Collects and validates the filing status of the user.
 int InputCollector::collectFilingStatus()
 {
 	auto userCollectFilingStatus = []()
@@ -122,7 +123,8 @@ char InputCollector::userDisplayChoice()
 			bool isDisplayChoiceValid = false;
 			isDisplayChoiceValid = displayChoiceValidator.validateDisplayChoice(inDisplayChoice);
 			if (isDisplayChoiceValid)
-			{
+			{	//Stores the value at index 0 of std::string inDisplayChoice 
+				//inside of char outDisplayChoice.
 				outDisplayChoice = inDisplayChoice[0];
 			}
 			return isDisplayChoiceValid;
@@ -130,7 +132,7 @@ char InputCollector::userDisplayChoice()
 
 	return inputLoopLogic<char>(userCollectDisplayChoice, userValidateDisplayChoice);
 }
-
+//Collects and validates the pay frequency of the user.
 User::IncomePeriod InputCollector::payFrequency()
 {
 	auto userCollectPayFrequency = []()
@@ -148,12 +150,12 @@ User::IncomePeriod InputCollector::payFrequency()
 			isPayFrequencyValid = payFrequencyValidator.validateFrequencyChoice(inPayFrequency, outPayFrequency);
 			return isPayFrequencyValid;
 		};
-
+		//stores the value returned by the InputLoop into an int variable to be cast to IncomePeriod before returning.
 		int outPayFrequency = inputLoopLogic<int>(userCollectPayFrequency, userValidatePayFrequency);
 	
 		return static_cast<User::IncomePeriod>(outPayFrequency);
 }
-
+// Collects and validates the daily income of the user.
 double InputCollector::collectDailyIncome()
 {
 	auto userDailyIncome = []()
