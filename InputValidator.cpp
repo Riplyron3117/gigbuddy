@@ -282,5 +282,9 @@ bool InputValidator::validateFrequencyChoice(const std::string& inFrequencyChoic
 		return false;
 	}
 
+	outFrequencyChoice = (outFrequencyChoice - 1);
+	
 	return true;
 }
+	
+

@@ -10,11 +10,15 @@ InputType inputLoopLogic(Reader input, Validator validation)
 		do
 		{
 			std::string rawInput = input();
-			isValid = validation(rawInput);
-			if (isValid == true) break;
+			isValid = validation(rawInput, result);
+			if (isValid == true)
+			break;
+
 		} while (!isValid);
 
 		return result;
 }
+	
+
 
 
