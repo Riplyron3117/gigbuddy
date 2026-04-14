@@ -37,7 +37,7 @@ The calculation engine is deliberately decoupled from the UI - The backend has n
 - Per-quarter payment estimates
 - W-4 optimizer for mixed W-2/1099 income
 
->>>>>>>>> ⚠️ Active development  <<<<<<<<<<
+>>>>>>>>> ⚠️ Active development  >>>>>>>>>
 
  ## Status
 
