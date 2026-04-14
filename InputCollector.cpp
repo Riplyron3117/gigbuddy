@@ -77,7 +77,7 @@ double InputCollector::collectIncome()
 		{
 			InputValidator annualIncomeValidator;
 			bool isAnnualValid = false;
-			isAnnualValid = annualIncomeValidator.validateIncome(inAnnualIncome, outAnnualIncome);
+			isAnnualValid = annualIncomeValidator.validateAnnualIncome(inAnnualIncome, outAnnualIncome);
 			return isAnnualValid;
 		};
 
@@ -170,7 +170,7 @@ double InputCollector::collectDailyIncome()
 		{
 			InputValidator dailyIncomeValidator;
 			bool isDailyIncomeValid = false;
-			isDailyIncomeValid = dailyIncomeValidator.validateIncome(inDailyIncome, outDailyIncome);
+			isDailyIncomeValid = dailyIncomeValidator.validateAnnualIncome(inDailyIncome, outDailyIncome);
 			return isDailyIncomeValid;
 		};
 

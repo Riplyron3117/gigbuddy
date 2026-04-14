@@ -46,7 +46,7 @@ bool InputValidator::validateName(const std::string& name) const
 
 	return true;
 }
-//validateAge() validates user's age
+//validateAge() validates age using validateIntegerValue
 bool InputValidator::validateAge(const std::string& age, int& outAge) const
 {
 	return  validateIntegerValue(ErrorMessages::invalidAge, age, 18, 120, outAge);
@@ -58,70 +58,9 @@ bool InputValidator::validateDaysPerWeek(const std::string& inDaysPerWeek, int& 
 }
 	
 //validatesIncome validates the user's income (used for all income types)
-bool InputValidator::validateIncome(const std::string& income, double& outIncome) const
+bool InputValidator::validateAnnualIncome(const std::string& income, double& outIncome) const
 {
-	bool decimalSeen = false;
-
-	if (income.empty())
-	{
-		std::cout << ErrorMessages::invalidIncome << std::endl;
-		return false;
-	}
-
-	if (income.length() > 15) //adds check bounds to prevent out of range errors when validating input.
-	{
-		std::cout << ErrorMessages::invalidIncome << std::endl;
-		return false;
-	}
-		
-	if (income.find(' ') != std::string::npos)
-	{
-		std::cout << ErrorMessages::invalidIncome << std::endl;
-		return false;
-	}
-
-	for (size_t input_size = 0; input_size < income.size(); input_size++)
-	{
-		char c = income[input_size];
-
-		if (c == '.')
-		{
-			if (decimalSeen)
-			{
-				std::cout << ErrorMessages::invalidIncome << std::endl;
-				return false;
-			}
-			decimalSeen = true;
-		}
-
-		else if (!std::isdigit(static_cast<unsigned char>(c)))
-		{
-			std::cout << ErrorMessages::invalidIncome << std::endl;
-			return false;
-		}
-	}
-
-	try
-	{
-		outIncome = std::stod(income);
-	}
-	catch (const std::invalid_argument&)
-	{
-		std::cout << ErrorMessages::invalidIncome << std::endl;
-		return false;
-	}
-	catch (const std::out_of_range&)
-	{
-		std::cout << ErrorMessages::invalidIncome << std::endl;
-		return false;
-	}
-
-	if (outIncome < 0)
-	{
-		std::cout << ErrorMessages::invalidIncome << std::endl;
-		return false;
-	}
-	return true;
+	return validateIncomeValue(ErrorMessages::invalidIncome, income, 0, outIncome);
 }
 //validateFilingStatus validates the filing status choice of the user.
 bool InputValidator::validateFilingStatus(const std::string& filingStatus, int& outFilingStatus) const
@@ -297,7 +236,72 @@ bool InputValidator::validateIntegerValue(const std::string_view errormsg, const
 	}
 
 	return true;
+}
+
+bool InputValidator::validateIncomeValue(std::string_view errormsg, const std::string& input, double min, double& outPut) const
+{
+	bool decimalSeen = false;
+
+	if (input.empty())
+	{
+		std::cout << errormsg << std::endl;
+		return false;
+	}
+
+	if (input.length() > 15) //adds check bounds to prevent out of range errors when validating input.
+	{
+		std::cout << errormsg << std::endl;
+		return false;
+	}
+
+	if (input.find(' ') != std::string::npos)
+	{
+		std::cout << errormsg << std::endl;
+		return false;
+	}
+
+	for (size_t input_size = 0; input_size < input.size(); input_size++)
+	{
+		char c = input[input_size];
+
+		if (c == '.')
+		{
+			if (decimalSeen)
+			{
+				std::cout << errormsg << std::endl;
+				return false;
+			}
+			decimalSeen = true;
+		}
+
+		else if (!std::isdigit(static_cast<unsigned char>(c)))
+		{
+			std::cout << errormsg << std::endl;
+			return false;
+		}
+	}
+
+	try
+	{
+		outPut = std::stod(input);
+	}
+	catch (const std::invalid_argument&)
+	{
+		std::cout << errormsg << std::endl;
+		return false;
+	}
+	catch (const std::out_of_range&)
+	{
+		std::cout << errormsg << std::endl;
+		return false;
+	}
+
+	if (outPut < min)
+	{
+		std::cout << errormsg << std::endl;
+		return false;
+	}
+	return true;
 
 }
-	
 
