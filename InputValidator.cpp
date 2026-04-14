@@ -49,51 +49,14 @@ bool InputValidator::validateName(const std::string& name) const
 //validateAge() validates user's age
 bool InputValidator::validateAge(const std::string& age, int& outAge) const
 {
-	if (age.find(' ') != std::string::npos)	//checks for spaces in input
-	{
-		std::cout << ErrorMessages::invalidAge << std::endl;
-		return false;
-	}
-		
-	if (age.length() > 3)		//adds check bounds to prevent out of range errors when validating input.
-	{
-		std::cout << ErrorMessages::invalidAge << std::endl;
-		return false;
-	}
-
-	for (char c : age)		//iterates over input, checking for non digit characters
-	{
-		if (!std::isdigit(static_cast<unsigned char>(c)))
-		{
-			std::cout << ErrorMessages::invalidAge << std::endl;
-			return false;
-		}
-	}
-
-	try		//converts string inputAge into integar and stors in variable age.
-	{
-		outAge = std::stoi(age);
-	}
-	catch (const std::invalid_argument&) //catches invalid argument exceptions.
-	{
-		std::cout << ErrorMessages::invalidAge << std::endl;
-		return false;
-		
-	}
-	catch (const std::out_of_range&)	//catches arguments that are out of range.
-	{
-		std::cout << ErrorMessages::invalidAge << std::endl;
-		return false;
-	}
-
-	if (outAge < 18 || outAge > 120)			//Validates age is between 18-120
-	{
-		std::cout << ErrorMessages::invalidAge << std::endl;
-		return false;
-	}
-
-	return true;
+	return  validateIntegerValue(ErrorMessages::invalidAge, age, 18, 120, outAge);
 }
+
+bool InputValidator::validateDaysPerWeek(const std::string& inDaysPerWeek, int& outDaysPerWeek) const
+{
+	return  validateIntegerValue(ErrorMessages::invalidDaysPerWeek, inDaysPerWeek, 1, 7, outDaysPerWeek);
+}
+	
 //validatesIncome validates the user's income (used for all income types)
 bool InputValidator::validateIncome(const std::string& income, double& outIncome) const
 {
@@ -286,6 +249,55 @@ bool InputValidator::validateFrequencyChoice(const std::string& inFrequencyChoic
 	outFrequencyChoice = (outFrequencyChoice - 1);
 	
 	return true;
+}
+
+bool InputValidator::validateIntegerValue(const std::string_view errormsg, const std::string& input, int min, int max, int& outPut) const
+{
+	if (input.find(' ') != std::string::npos)	//checks for spaces in input
+	{
+		std::cout << errormsg << std::endl;
+		return false;
+	}
+
+	if (std::to_string(max).length() > 3)		//adds check bounds to prevent out of range errors when validating input.
+	{
+		std::cout << errormsg << std::endl;
+		return false;
+	}
+
+	for (char c : input)		//iterates over input, checking for non digit characters
+	{
+		if (!std::isdigit(static_cast<unsigned char>(c)))
+		{
+			std::cout << errormsg << std::endl;
+			return false;
+		}
+	}
+
+	try		//converts string inputAge into integar and stors in variable age.
+	{
+		outPut = std::stoi(input);
+	}
+	catch (const std::invalid_argument&) //catches invalid argument exceptions.
+	{
+		std::cout << errormsg << std::endl;
+		return false;
+
+	}
+	catch (const std::out_of_range&)	//catches arguments that are out of range.
+	{
+		std::cout << errormsg << std::endl;
+		return false;
+	}
+
+	if (outPut < min || outPut > max)			//Validates age is between 18-120
+	{
+		std::cout << errormsg << std::endl;
+		return false;
+	}
+
+	return true;
+
 }
 	
 

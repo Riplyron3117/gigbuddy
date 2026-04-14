@@ -177,3 +177,24 @@ double InputCollector::collectDailyIncome()
 	return inputLoopLogic<double>(userDailyIncome, userValidateDailyIncome);
 }
 
+int InputCollector::collectDaysPerWeek()
+{
+	auto userDaysPerWeek = []()
+		{
+			std::string inDaysPerWeek;
+			std::cout << Prompts::daysPerWeekPrompt;
+			std::getline(cin, inDaysPerWeek);
+			return inDaysPerWeek;
+		};
+
+	auto userValidateDaysPerWeek = [](std::string inDaysPerWeek, int& outDaysPerWeek)
+		{
+			InputValidator daysPerWeekValidator;
+			bool isDaysPerWeekValid = false;
+			isDaysPerWeekValid = daysPerWeekValidator.validateDaysPerWeek(inDaysPerWeek, outDaysPerWeek);
+			return isDaysPerWeekValid;
+		};
+
+	return inputLoopLogic<int>(userDaysPerWeek, userValidateDaysPerWeek);
+}
+

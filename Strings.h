@@ -9,6 +9,7 @@ namespace Prompts
 	inline constexpr std::string_view agePrompt = "Please enter a Valid age over 18 years old: ";
 	inline constexpr std::string_view incomePrompt = "Please enter your annual income: ";
 	inline constexpr std::string_view dailyIncomePrompt = "Please enter your income for the day: ";
+	inline constexpr std::string_view daysPerWeekPrompt = "Please enter the number of days you worked this week: ";
 	inline constexpr std::string_view filingStatusPrompt = "1. Single. \n"
 														   "2. Married Filing Jointly. \n"
 														   "3. Married Filing Seperate. \n"
@@ -39,5 +40,7 @@ namespace ErrorMessages
 	inline constexpr const char* fileNotFound = "Could not open the file";
 
 	inline constexpr const char* invalidPayFrequency = "Invalid Input: Please select 1. STOP, 2. DAY, 3. WEEK, 4. MONTH ";
+
+	inline constexpr const char* invalidDaysPerWeek = "Invalid Input: Please enter a number between 1 and 7 ";
 
 }
