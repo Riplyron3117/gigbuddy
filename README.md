@@ -14,6 +14,7 @@ What this means is that even if the user loses their device, their information w
 ##Architecture
 
 |   layer   |        tech        |          purpose                    |
+|---|---|---|
 |     UI    |  Flutter           | Cross-Platform mobile Interface     |
 |   Bridge  |  Dart FFI          | Zero-overhead c++ intop             |
 |  Backend  |  C++               | Tax Calculation Engine              |
