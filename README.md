@@ -1,27 +1,45 @@
-GigBuddy - A simple project that turned into something more.
+# GigBuddy
+> A simple project that turned into something more.
 
-I started GigBuddy as a simple tool to solve a little problem that I hated dealing with every year. Figuring out how much tax I should have taken out of my check to ensure the government doesn't receive an interest-free loan.
-A simple W-4 optimizer to ensure I kept most of my paycheck on payday.
-It was from this simple tool, and my side gig as a freelance handyman, that I got the idea to create something even bigger. Something that solves a problem that many freelance and gig workers face, calculating their taxes throughout the year, knowing how much they have
-to spend, and how much to put aside for the IRS. 
-Sure, there are apps out there that solve this problem; many of them allow users to connect their bank accounts, and many of them ship your information to far-off cloud servers for storage. As well as a host of other conveniences.
-What I wanted GigBuddy to be was something that was 100% localized, efficient, and usable when internet services are not available. 
-To do this, I decided that the entire app was to be localized and security based. While users are not required to provide SSNs, bank account details, or any other sensitive information to GigBuddy, security and control of their information, regardless of what it is, should belong to the user.
-Not some third-party banking API or cloud provider. To do this, all information will be stored on the users device, in a localized database utilizing SQLite. Information will be encrypted at rest and persist throughout sessions. 
-What this means is that even if the user loses their device, their information will be secured.
+I started GigBuddy as a tool to solve a problem I hated dealing with 
+every year — figuring out how much tax to withhold so the government 
+doesn't get an interest-free loan at my expense. A simple W-4 optimizer 
+to keep more of my paycheck on payday.
 
+It was from that tool, and my side work as a freelance handyman, that I 
+got the idea to build something bigger. Something that solves a problem 
+many freelance and gig workers face: calculating taxes throughout the 
+year, knowing how much is safe to spend, and how much to set aside for 
+the IRS.
 
-##Architecture
+There are apps that solve this problem — many connect to your bank, many 
+ship your data to cloud servers, many bundle in a host of conveniences 
+you didn't ask for. GigBuddy takes a different approach.
 
-|   layer   |        tech        |          purpose                    |
+**100% local. No internet required. Your data stays on your device.**
+
+Users are never asked for SSNs, bank account details, or sensitive 
+credentials. All data is stored locally in an encrypted SQLite database, 
+persisted across sessions, and secured at rest. If you lose your device, 
+your information stays protected.
+
+---
+
+## Architecture
+
+| Layer | Technology | Purpose |
 |---|---|---|
-|     UI    |  Flutter           | Cross-Platform mobile Interface     |
-|   Bridge  |  Dart FFI          | Zero-overhead c++ intop             |
-|  Backend  |  C++               | Tax Calculation Engine              |
-|  Storage  |  SQLite(encrypted) | Local Data Persistence              |
-|  Tax Data |  JSON              | Updatable bracket/rate definitions  |
+| UI | Flutter | Cross-platform mobile interface |
+| Bridge | Dart FFI | Zero-overhead C++ interop |
+| Backend | C++ | Tax calculation engine |
+| Storage | SQLite (encrypted) | Local data persistence |
+| Tax Data | JSON | Updatable bracket/rate definitions |
 
-The calculation engine is deliberately decoupled from the UI - The backend has no Flutter dependencies and can be tested independently or reused in other contexts.
+The calculation engine is deliberately decoupled from the UI — the C++ 
+backend has no Flutter dependencies and can be tested independently or 
+reused in other contexts.
+
+---
 
 ## Features
 
@@ -38,31 +56,51 @@ The calculation engine is deliberately decoupled from the UI - The backend has n
 - Per-quarter payment estimates
 - W-4 optimizer for mixed W-2/1099 income
 
+> ⚠️ Active development — not yet suitable for actual tax filing.
 
-> ⚠️ Active development  
- ## Status
+---
 
-Currently in active development. Backend calculation engine 
-~50% complete. Not yet suitable for actual tax filing.
+## Status
 
-### Completed
-- [x] Basic W4 marginal tax rate logic
-- [x] Console-based UI (for testing)
+Backend calculation engine ~50% complete.
+
+**Completed**
+- [x] Basic W-4 marginal tax rate logic
 - [x] Income annualization across pay frequencies
-- [x] Tax data available via updatable JSON file
-- [x] many other things. 
+- [x] Tax bracket data via updatable JSON
+- [x] Console-based UI for backend testing
 
-### In Progress
+**In Progress**
 - [ ] Input validation helper (template-based, reusable)
 - [ ] Self-employment tax calculation
-- [ ] State Tax calculator 
+- [ ] State tax calculation
 - [ ] Quarterly payment estimates
 
-### Planned
+**Planned**
 - [ ] W-4 optimizer
 - [ ] Encrypted local storage
 - [ ] Flutter UI (wizard-style input flow)
-- [ ] login via username/password or biometrics
-- [ ] user input via manual entry or document scan
-- [ ] automatic storage cleanup based on user preferences.
-      
+- [ ] Login via username/password or biometrics
+- [ ] User input via manual entry or document scan
+- [ ] Automatic storage cleanup based on user preferences
+
+---
+
+## Building
+
+## Building
+
+### Backend (C++)
+Currently developed and tested in Visual Studio 2026 on Windows.
+CMake support for cross-platform mobile builds planned prior to 
+Flutter integration.
+
+### Flutter App
+*Coming soon — Flutter UI in active planning.*
+---
+
+## About
+
+Built by a former truck driver solving real problems while learning 
+software engineering. GigBuddy exists because the tools that should 
+exist for gig workers mostly don't — or they come with strings attached.
