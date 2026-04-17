@@ -1,7 +1,6 @@
 #include <iomanip>
 #include <sstream>
 #include <iostream>
-
 #include "DisplayService.h"
 
 DisplayService::DisplayService() {}

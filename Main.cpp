@@ -1,9 +1,9 @@
 #include <iostream>
-#include "User.h"
-#include "InputCollector.h"
-#include "DisplayService.h"
-#include "TaxCalculator.h"
-#include "TaxBracketRepository.h"
+#include "models\User.h"
+#include "input\InputCollector.h"
+#include "display\DisplayService.h"
+#include "tax_logic\TaxCalculator.h"
+#include "tax_logic\TaxBracketRepository.h"
 
 using namespace std;
 

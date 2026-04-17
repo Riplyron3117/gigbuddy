@@ -1,5 +1,5 @@
-#include "InputValidator.h"
-#include "strings.h"
+#include "validation\InputValidator.h"
+#include "resources\strings.h"
 #include <iostream>
 #include <stdexcept>
 #include <cctype>

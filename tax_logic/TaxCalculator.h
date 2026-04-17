@@ -1,8 +1,5 @@
 #pragma once
-
-#include <algorithm>
-#include <climits>
-#include "User.h"
+#include "models\User.h"
 #include "TaxBracketRepository.h"
 class TaxCalculator
 {

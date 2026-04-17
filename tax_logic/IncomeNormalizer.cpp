@@ -1,7 +1,7 @@
 
 #include "IncomeNormalizer.h"
-#include "InputCollector.h"
-#include "strings.h"
+#include "input\InputCollector.h"
+#include "resources\strings.h"
 #include <stdexcept>
 
 IncomeNormalizer::IncomeNormalizer() {};

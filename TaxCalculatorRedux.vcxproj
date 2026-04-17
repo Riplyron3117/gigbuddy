@@ -103,13 +103,14 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(ProjectDir)tax_brackets.json" "$(OutDir)tax_brackets.json"</Command>
+      <Command>copy /Y "$(ProjectDir)resources\tax_brackets.json" "$(OutDir)tax_brackets.json"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -125,31 +126,32 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(ProjectDir)resources\tax_brackets.json" "$(OutDir)tax_brackets.json"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DisplayService.cpp" />
-    <ClCompile Include="IncomeNormalizer.cpp" />
-    <ClCompile Include="InputCollector.cpp" />
-    <ClCompile Include="InputValidator.cpp" />
+    <ClCompile Include="display\DisplayService.cpp" />
+    <ClCompile Include="input\InputCollector.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="TaxBracketRepository.cpp" />
-    <ClCompile Include="TaxCalculator.cpp" />
-    <ClCompile Include="User.cpp" />
+    <ClCompile Include="models\User.cpp" />
+    <ClCompile Include="tax_logic\TaxBracketRepository.cpp" />
+    <ClCompile Include="tax_logic\TaxCalculator.cpp" />
+    <ClCompile Include="validation\InputValidator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DisplayService.h" />
-    <ClInclude Include="IncomeNormalizer.h" />
-    <ClInclude Include="InputCollector.h" />
-    <ClInclude Include="InputLoopHelper.h" />
-    <ClInclude Include="InputValidator.h" />
-    <ClInclude Include="Strings.h" />
-    <ClInclude Include="TaxBracketRepository.h" />
-    <ClInclude Include="TaxCalculator.h" />
-    <ClInclude Include="User.h" />
+    <ClInclude Include="display\DisplayService.h" />
+    <ClInclude Include="input\InputCollector.h" />
+    <ClInclude Include="input\InputLoopHelper.h" />
+    <ClInclude Include="models\User.h" />
+    <ClInclude Include="resources\Strings.h" />
+    <ClInclude Include="tax_logic\TaxBracketRepository.h" />
+    <ClInclude Include="tax_logic\TaxCalculator.h" />
+    <ClInclude Include="validation\InputValidator.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="tax_brackets.json" />
+    <None Include="resources\tax_brackets.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

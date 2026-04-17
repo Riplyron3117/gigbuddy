@@ -1,7 +1,7 @@
 #include "InputCollector.h"
-#include "InputValidator.h"
+#include "validation\InputValidator.h"
 #include "InputLoopHelper.h"
-#include "Strings.h"
+#include "resources\Strings.h"
 #include <string>
 #include <iostream>
 #include <cctype>

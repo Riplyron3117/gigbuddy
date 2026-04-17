@@ -21,22 +21,22 @@
     <ClCompile Include="InputCollector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TaxBracketRepository.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DisplayService.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TaxCalculator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InputValidator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="IncomeNormalizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="display\DisplayService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tax_logic\TaxBracketRepository.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tax_logic\TaxCalculator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="validation\InputValidator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,34 +44,33 @@
     <ClInclude Include="InputCollector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TaxBracketRepository.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DisplayService.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="User.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TaxCalculator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputValidator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IncomeNormalizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Strings.h">
+    <ClInclude Include="InputLoopHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputLoopHelper.h">
+    <ClInclude Include="display\DisplayService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resources\Strings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tax_logic\TaxBracketRepository.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tax_logic\TaxCalculator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="validation\InputValidator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="tax_brackets.json" />
-    <None Include=".github\copilot-instructions.md" />
+    <None Include="resources\tax_brackets.json" />
   </ItemGroup>
 </Project>

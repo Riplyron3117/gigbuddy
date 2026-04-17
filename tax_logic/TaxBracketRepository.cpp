@@ -1,10 +1,9 @@
 ﻿#include "TaxBracketRepository.h"
-#include "strings.h"
+#include "resources\strings.h"
 #include <nlohmann/json.hpp>
 #include <fstream>
 #include <stdexcept>
 #include <string>
-#include <optional>
 
 TaxBracketRepository::TaxBracketRepository()
 {
