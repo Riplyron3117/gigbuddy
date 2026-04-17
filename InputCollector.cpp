@@ -153,7 +153,7 @@ User::IncomePeriod InputCollector::payFrequency()
 		//stores the value returned by the InputLoop into an int variable to be cast to IncomePeriod before returning.
 		int outPayFrequency = inputLoopLogic<int>(userCollectPayFrequency, userValidatePayFrequency);
 	
-		return static_cast<User::IncomePeriod>(outPayFrequency);
+		return static_cast<User::IncomePeriod>(outPayFrequency - 1);
 }
 // Collects and validates the daily income of the user.
 double InputCollector::collectDailyIncome()

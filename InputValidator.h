@@ -17,5 +17,6 @@ class InputValidator
 private:
 	bool validateIntegerValue(std::string_view errormsg, const std::string& input, int min, int max, int& outPut) const;
 	bool validateIncomeValue(std::string_view errormsg, const std::string& input, double min, double& outPut) const;
+	bool validateStringValue(std::string_view errormsg, const std::string& input) const;
 };
 

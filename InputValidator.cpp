@@ -9,42 +9,7 @@ InputValidator::InputValidator() {}
 //validateName() validates user's input for name
 bool InputValidator::validateName(const std::string& name) const
 {
-	if (name.empty()) //checks for empty input
-	{
-		std::cout << ErrorMessages::invalidName << std::endl;
-		return false;
-	}
-
-	//adds check bounds to prevent out of range errors when validating input.
-	if (name.length() > 100)
-	{
-		std::cout << ErrorMessages::invalidName << std::endl;
-		return false;
-	}
-
-	bool hasAlpha = false; //checks for at least one alpha character
-
-	for (char c : name)		//iterates through Input checking for invalid characters.
-	{	//checks if input is not an alpha or space.
-		if (!std::isalpha(static_cast<unsigned char>(c)) && !std::isspace(static_cast<unsigned char>(c)))
-		{
-			std::cout << ErrorMessages::invalidName << std::endl;
-			return false;
-		}
-
-		if (std::isalpha(static_cast<unsigned char>(c)))
-		{
-			hasAlpha = true;
-		}
-	}
-
-	if (!hasAlpha) //calidates the presence of at least one alpha character.
-	{
-		std::cout << ErrorMessages::invalidName << std::endl;
-		return false;
-	}
-
-	return true;
+	return validateStringValue(ErrorMessages::invalidName, name);
 }
 //validateAge() validates age using validateIntegerValue
 bool InputValidator::validateAge(const std::string& age, int& outAge) const
@@ -140,54 +105,8 @@ bool InputValidator::validateDisplayChoice(const std::string& displayChoice) con
 
 bool InputValidator::validateFrequencyChoice(const std::string& inFrequencyChoice, int& outFrequencyChoice) const
 {
-	if (inFrequencyChoice.length() > 1)
-	{
-		std::cout << ErrorMessages::invalidPayFrequency << std::endl;
-		return false;
-	}
-
-	if (inFrequencyChoice.empty())
-	{
-		std::cout << ErrorMessages::invalidPayFrequency << std::endl;
-		return false;
-	}
-
-	for (size_t inputSize = 0; inputSize < inFrequencyChoice.size(); inputSize++)
-	{
-		char c = inFrequencyChoice[inputSize];
-
-		if (!std::isdigit(static_cast<unsigned char>(c)))
-		{
-			std::cout << ErrorMessages::invalidPayFrequency << std::endl;
-			return false;
-		}
-
-	}
-
-	try 
-	{
-		outFrequencyChoice = std::stoi(inFrequencyChoice);
-	}
-	catch (std::invalid_argument&)
-	{
-		std::cout << ErrorMessages::invalidPayFrequency << std::endl;
-		return false;
-	}
-	catch (std::out_of_range&)
-	{
-		std::cout << ErrorMessages::invalidPayFrequency << std::endl;
-		return false;
-	}
-
-	if (outFrequencyChoice < 1 || outFrequencyChoice > 4)
-	{
-		std::cout << ErrorMessages::invalidPayFrequency << std::endl;
-		return false;
-	}
-
-	outFrequencyChoice = (outFrequencyChoice - 1);
+	return validateIntegerValue(ErrorMessages::invalidPayFrequency, inFrequencyChoice, 1, 4, outFrequencyChoice);
 	
-	return true;
 }
 
 bool InputValidator::validateIntegerValue(const std::string_view errormsg, const std::string& input, int min, int max, int& outPut) const
@@ -305,3 +224,41 @@ bool InputValidator::validateIncomeValue(std::string_view errormsg, const std::s
 
 }
 
+bool InputValidator::validateStringValue(std::string_view errormsg, const std::string& input) const
+{
+	if (input.empty()) //checks for empty input
+	{
+		std::cout << errormsg << std::endl;
+		return false;
+	}
+
+	//adds check bounds to prevent out of range errors when validating input.
+	if (input.length() > 100)
+	{
+		std::cout << errormsg << std::endl;
+		return false;
+	}
+
+	bool hasAlpha = false; //checks for at least one alpha character
+
+	for (char c : input)		//iterates through Input checking for invalid characters.
+	{	//checks if input is not an alpha or space.
+		if (!std::isalpha(static_cast<unsigned char>(c)) && !std::isspace(static_cast<unsigned char>(c)))
+		{
+			std::cout << errormsg << std::endl;
+			return false;
+		}
+
+		if (std::isalpha(static_cast<unsigned char>(c)))
+		{
+			hasAlpha = true;
+		}
+
+		if (!hasAlpha) //calidates the presence of at least one alpha character.
+		{
+			std::cout << ErrorMessages::invalidName << std::endl;
+			return false;
+		}
+	}
+		return true;
+}
