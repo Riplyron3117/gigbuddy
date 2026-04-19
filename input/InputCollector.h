@@ -18,6 +18,8 @@ public:
 
 	int collectDaysPerWeek();
 
+	int collectStopsPerDay();
+
 	int collectFilingStatus();
 
 	char userDisplayChoice();

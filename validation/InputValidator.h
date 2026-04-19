@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <optional>
 
 class InputValidator
 {
@@ -13,6 +14,7 @@ class InputValidator
 		bool validateDisplayChoice(const std::string& displayChoice) const;
 		bool validateFrequencyChoice(const std::string& inFrequencyChoice, int& outFrequencyChoice) const;
 		bool validateDaysPerWeek(const std::string& inDaysPerWeek, int& outDaysPerWeek) const;
+		bool validateStopsPerDay(const std::string& inStopsPerDay, int& outStopsPerDay) const;
 
 private:
 	bool validateIntegerValue(std::string_view errormsg, const std::string& input, int min, int max, int& outPut) const;

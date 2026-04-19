@@ -176,7 +176,7 @@ double InputCollector::collectDailyIncome()
 
 	return inputLoopLogic<double>(userDailyIncome, userValidateDailyIncome);
 }
-
+//Collects and validates the days per week worked by the user.
 int InputCollector::collectDaysPerWeek()
 {
 	auto userDaysPerWeek = []()
@@ -196,5 +196,25 @@ int InputCollector::collectDaysPerWeek()
 		};
 
 	return inputLoopLogic<int>(userDaysPerWeek, userValidateDaysPerWeek);
+}
+//Collects and validates the number of stops per day of the user.
+int InputCollector::collectStopsPerDay()
+{
+	auto userStopsPerDay = []()
+		{
+			std::string inStopsPerDay;
+			std::cout << Prompts::stopsPerDayPrompt;
+			std::getline(cin, inStopsPerDay);
+			return inStopsPerDay;
+		};
+	auto userValidateStopsPerDay = [](std::string inStopsPerDay, int& outStopsPerDay)
+	{
+		InputValidator stopsPerDayValidator;
+		bool isStopsPerDayValid = false;
+		isStopsPerDayValid = stopsPerDayValidator.validateStopsPerDay(inStopsPerDay, outStopsPerDay);
+		return isStopsPerDayValid;
+	};
+
+	return inputLoopLogic<int>(userStopsPerDay, userValidateStopsPerDay);
 }
 

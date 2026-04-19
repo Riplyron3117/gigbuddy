@@ -21,6 +21,11 @@ bool InputValidator::validateDaysPerWeek(const std::string& inDaysPerWeek, int& 
 {
 	return  validateIntegerValue(ErrorMessages::invalidDaysPerWeek, inDaysPerWeek, 1, 7, outDaysPerWeek);
 }
+
+bool InputValidator::validateStopsPerDay(const std::string& inStopsPerDay, int& outStopsPerDay) const
+{
+	return validateIntegerValue(ErrorMessages::invalidStopsPerDay, inStopsPerDay, 0, 350, outStopsPerDay);
+}
 	
 //validatesIncome validates the user's income (used for all income types)
 bool InputValidator::validateAnnualIncome(const std::string& income, double& outIncome) const
