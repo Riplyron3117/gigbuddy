@@ -6,27 +6,31 @@
 #include <iostream>
 #include <cctype>
 
-using namespace std;
-
 //Constructor
 InputCollector::InputCollector() {}
 
+std::string InputCollector::inputCollectionHelper(std::string_view prompt)
+{
+	std::string userInput;
+	std::cout << prompt;
+	std::getline(std::cin, userInput);
+	return userInput;
+}
 
 //collectName() collects user's name as input
 //Utilizes reader and validation lambdas for prompting, taking input, validating input and assigning.
 std::string InputCollector::collectName()
-{	//reader
-	auto userNameCollection = []() 
+{
+	InputValidator validatedName;
+
+	//reader
+	auto userNameCollection = [prompt = Prompts::namePrompt]() 
 		{
-			std::string userName;
-			std::cout << Prompts::namePrompt;
-			std::getline(cin, userName);
-			return userName;
+			return inputCollectionHelper(prompt);
 		};
 	//validator takes raw input and outputs final, validated input
-	auto userNameValidation = [](std::string userName, std::string& outName)
+	auto userNameValidation = [&validatedName](std::string userName, std::string& outName)
 		{
-			InputValidator validatedName;
 			bool nameValidator = false;
 			nameValidator = validatedName.validateName(userName);
 			if (nameValidator)
@@ -36,24 +40,22 @@ std::string InputCollector::collectName()
 			return nameValidator;
 		};
 	//InputLoopHelper calls reader and validator. Returns final value.
-	return inputLoopLogic<std::string>(userNameCollection, userNameValidation);;
+	return inputLoopLogic<std::string>(userNameCollection, userNameValidation);
 }
 
 //collectAge() collects users Age and Validates input
 int InputCollector::collectAge()
 {
+	InputValidator ageValidator;
+
 	//reader
-	auto userAgeCollection = []()
+	auto userAgeCollection = [prompt = Prompts::agePrompt]()
 		{
-			std::string inputAge;	
-			std::cout << Prompts::agePrompt;
-			std::getline(std::cin, inputAge);
-			return inputAge;
+			return inputCollectionHelper(prompt);
 		};
 	//validator
-	auto userAgeValidation = [](std::string& inputAge, int& outPutAge)
+	auto userAgeValidation = [&ageValidator](std::string& inputAge, int& outPutAge)
 		{
-			InputValidator ageValidator;
 			bool ageValidation = false;
 			ageValidation = ageValidator.validateAge(inputAge, outPutAge);
 			return ageValidation;
@@ -64,18 +66,15 @@ int InputCollector::collectAge()
 //Collects and validates annual income of user.
 double InputCollector::collectIncome()
 {
+	InputValidator annualIncomeValidator;
 
-	auto userCollectAnnualIncome = []()
+	auto userCollectAnnualIncome = [prompt = Prompts::annualIncomePrompt]()
 		{
-			std::string inAnnualIncome;
-			std::cout << Prompts::incomePrompt;
-			std::getline(cin, inAnnualIncome);
-			return inAnnualIncome;
+			return inputCollectionHelper(prompt);
 		};
 
-	auto userValidateAnnualIncome = [](std::string inAnnualIncome, double& outAnnualIncome)
+	auto userValidateAnnualIncome = [&annualIncomeValidator](std::string inAnnualIncome, double& outAnnualIncome)
 		{
-			InputValidator annualIncomeValidator;
 			bool isAnnualValid = false;
 			isAnnualValid = annualIncomeValidator.validateAnnualIncome(inAnnualIncome, outAnnualIncome);
 			return isAnnualValid;
@@ -86,17 +85,15 @@ double InputCollector::collectIncome()
 //Collects and validates the filing status of the user.
 int InputCollector::collectFilingStatus()
 {
-	auto userCollectFilingStatus = []()
+	InputValidator filingStatusValidator;
+
+	auto userCollectFilingStatus = [prompt = Prompts::filingStatusPrompt]()
 		{
-			std::string inFilingStatus;
-			std::cout << Prompts::filingStatusPrompt;
-			std::getline(cin, inFilingStatus);
-			return inFilingStatus;
+			return inputCollectionHelper(prompt);
 		};
 
-	auto userValidateFilingStatus = [](std::string inFilingStatus, int& outFilingStatus)
+	auto userValidateFilingStatus = [&filingStatusValidator](std::string inFilingStatus, int& outFilingStatus)
 		{
-			InputValidator filingStatusValidator;
 			bool isFilingStatusValid = false;
 			isFilingStatusValid = filingStatusValidator.validateFilingStatus(inFilingStatus, outFilingStatus);
 			return isFilingStatusValid;
@@ -109,17 +106,15 @@ int InputCollector::collectFilingStatus()
 //collects and validates the users choice before displaying results.
 char InputCollector::userDisplayChoice()
 {
-	auto userCollectDisplayChoice = []()
+	InputValidator displayChoiceValidator;
+
+	auto userCollectDisplayChoice = [prompt = Prompts::displayChoicePrompt]()
 		{
-			std::string inDisplayChoice;
-			std::cout << Prompts::displayChoicePrompt;
-			std::getline(cin, inDisplayChoice);
-			return inDisplayChoice;
+			return inputCollectionHelper(prompt);
 		};
 
-	auto userValidateDisplayChoice = [](std::string inDisplayChoice, char& outDisplayChoice)
+	auto userValidateDisplayChoice = [&displayChoiceValidator](std::string inDisplayChoice, char& outDisplayChoice)
 		{
-			InputValidator displayChoiceValidator;
 			bool isDisplayChoiceValid = false;
 			isDisplayChoiceValid = displayChoiceValidator.validateDisplayChoice(inDisplayChoice);
 			if (isDisplayChoiceValid)
@@ -135,17 +130,15 @@ char InputCollector::userDisplayChoice()
 //Collects and validates the pay frequency of the user.
 User::IncomePeriod InputCollector::payFrequency()
 {
-	auto userCollectPayFrequency = []()
+	InputValidator payFrequencyValidator;
+
+	auto userCollectPayFrequency = [prompt = Prompts::payFrequencyPrompt]()
 		{
-			std::string inPayFrequency;
-			std::cout << Prompts::payFrequencyPrompt;
-			std::getline(cin, inPayFrequency);
-			return inPayFrequency;
+			return inputCollectionHelper(prompt);
 		};
 
-	auto userValidatePayFrequency = [](std::string inPayFrequency, int& outPayFrequency)
+	auto userValidatePayFrequency = [&payFrequencyValidator](std::string inPayFrequency, int& outPayFrequency)
 		{
-			InputValidator payFrequencyValidator;
 			bool isPayFrequencyValid = false;
 			isPayFrequencyValid = payFrequencyValidator.validateFrequencyChoice(inPayFrequency, outPayFrequency);
 			return isPayFrequencyValid;
@@ -155,20 +148,19 @@ User::IncomePeriod InputCollector::payFrequency()
 	
 		return static_cast<User::IncomePeriod>(outPayFrequency - 1);
 }
+
 // Collects and validates the daily income of the user.
 double InputCollector::collectDailyIncome()
 {
-	auto userDailyIncome = []()
+	InputValidator dailyIncomeValidator;
+
+	auto userDailyIncome = [prompt = Prompts::dailyIncomePrompt]()
 		{
-			std::string inDailyIncome;
-			std::cout << Prompts::dailyIncomePrompt;
-			std::getline(cin, inDailyIncome);
-			return inDailyIncome;
+			return inputCollectionHelper(prompt);
 		};
 
-	auto userValidateDailyIncome = [](std::string inDailyIncome, double& outDailyIncome)
+	auto userValidateDailyIncome = [&dailyIncomeValidator](std::string inDailyIncome, double& outDailyIncome)
 		{
-			InputValidator dailyIncomeValidator;
 			bool isDailyIncomeValid = false;
 			isDailyIncomeValid = dailyIncomeValidator.validateAnnualIncome(inDailyIncome, outDailyIncome);
 			return isDailyIncomeValid;
@@ -179,17 +171,15 @@ double InputCollector::collectDailyIncome()
 //Collects and validates the days per week worked by the user.
 int InputCollector::collectDaysPerWeek()
 {
-	auto userDaysPerWeek = []()
+	InputValidator daysPerWeekValidator;
+
+	auto userDaysPerWeek = [prompt = Prompts::daysPerWeekPrompt]()
 		{
-			std::string inDaysPerWeek;
-			std::cout << Prompts::daysPerWeekPrompt;
-			std::getline(cin, inDaysPerWeek);
-			return inDaysPerWeek;
+			return inputCollectionHelper(prompt);
 		};
 
-	auto userValidateDaysPerWeek = [](std::string inDaysPerWeek, int& outDaysPerWeek)
+	auto userValidateDaysPerWeek = [&daysPerWeekValidator](std::string inDaysPerWeek, int& outDaysPerWeek)
 		{
-			InputValidator daysPerWeekValidator;
 			bool isDaysPerWeekValid = false;
 			isDaysPerWeekValid = daysPerWeekValidator.validateDaysPerWeek(inDaysPerWeek, outDaysPerWeek);
 			return isDaysPerWeekValid;
@@ -200,16 +190,14 @@ int InputCollector::collectDaysPerWeek()
 //Collects and validates the number of stops per day of the user.
 int InputCollector::collectStopsPerDay()
 {
-	auto userStopsPerDay = []()
+	InputValidator stopsPerDayValidator;
+
+	auto userStopsPerDay = [prompt = Prompts::stopsPerDayPrompt]()
 		{
-			std::string inStopsPerDay;
-			std::cout << Prompts::stopsPerDayPrompt;
-			std::getline(cin, inStopsPerDay);
-			return inStopsPerDay;
+			return inputCollectionHelper(prompt);
 		};
-	auto userValidateStopsPerDay = [](std::string inStopsPerDay, int& outStopsPerDay)
+	auto userValidateStopsPerDay = [&stopsPerDayValidator](std::string inStopsPerDay, int& outStopsPerDay)
 	{
-		InputValidator stopsPerDayValidator;
 		bool isStopsPerDayValid = false;
 		isStopsPerDayValid = stopsPerDayValidator.validateStopsPerDay(inStopsPerDay, outStopsPerDay);
 		return isStopsPerDayValid;
@@ -217,4 +205,6 @@ int InputCollector::collectStopsPerDay()
 
 	return inputLoopLogic<int>(userStopsPerDay, userValidateStopsPerDay);
 }
+
+
 

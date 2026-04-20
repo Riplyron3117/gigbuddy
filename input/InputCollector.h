@@ -25,4 +25,7 @@ public:
 	char userDisplayChoice();
 
 	User::IncomePeriod payFrequency();
+
+private:
+	static std::string inputCollectionHelper(std::string_view prompt);
 };

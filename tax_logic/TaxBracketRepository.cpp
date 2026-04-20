@@ -1,5 +1,5 @@
 ﻿#include "TaxBracketRepository.h"
-#include "resources\strings.h"
+#include "resources\Strings.h"
 #include <nlohmann/json.hpp>
 #include <fstream>
 #include <stdexcept>
@@ -13,7 +13,7 @@ TaxBracketRepository::TaxBracketRepository()
 
 void TaxBracketRepository::initializeFederalTaxBracketData()
 {
-	std::ifstream fedTaxFile("tax_brackets.json");
+	std::ifstream fedTaxFile("resources/tax_brackets.json");
 	if (!fedTaxFile.is_open())
 	{
 		throw std::runtime_error(ErrorMessages::fileNotFound);
