@@ -4,6 +4,7 @@
 #include "display\DisplayService.h"
 #include "tax_logic\TaxCalculator.h"
 #include "tax_logic\TaxBracketRepository.h"
+#include "tax_logic/IncomeNormalizer.h"
 
 using namespace std;
 
@@ -16,15 +17,16 @@ int main()
 	TaxCalculator taxCalculator;
 	TaxBracketRepository taxRepository;
 	InputCollector infoCollection;
+	IncomeNormalizer incomeNorm;
 	User bob;
 
 		bob.setName(infoCollection.collectName());
 		bob.setAge(infoCollection.collectAge());
-		bob.setDaysPerWeek(infoCollection.collectDaysPerWeek());
-		bob.setIncomeAmount(infoCollection.collectDailyIncome());
-		std::cout << bob.getIncomeAmount();
 		bob.setIncomeFrequency(infoCollection.payFrequency());
-		bob.setAnnualIncome(infoCollection.collectIncome());
+
+		infoCollection.collectIncomeDetails(bob);
+
+		bob.setAnnualIncome(incomeNorm.normalizeIncome(bob));
 		bob.setFilingStatus(infoCollection.collectFilingStatus());
 
 		//calculate federal tax and store result

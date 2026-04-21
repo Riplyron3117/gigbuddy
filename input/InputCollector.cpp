@@ -9,6 +9,7 @@
 //Constructor
 InputCollector::InputCollector() {}
 
+
 std::string InputCollector::inputCollectionHelper(std::string_view prompt)
 {
 	std::string userInput;
@@ -63,14 +64,24 @@ int InputCollector::collectAge()
 	
 	return inputLoopLogic<int>(userAgeCollection, userAgeValidation);
 }
+
 //Collects and validates annual income of user.
-double InputCollector::collectIncome()
+double InputCollector::collectIncome(User::IncomePeriod frequency = User::IncomePeriod::NONE)
 {
 	InputValidator annualIncomeValidator;
+	
+	std::string_view userPrompt;
+	switch (frequency)
+	{
+	case User::IncomePeriod::STOP: { userPrompt = Prompts::perStopPrompt; break; };
+	case User::IncomePeriod::DAY: { userPrompt = Prompts::dailyIncomePrompt; break; };
+	case User::IncomePeriod::WEEK: { userPrompt = Prompts::weeklyIncomePrompt; break; };
+	case User::IncomePeriod::MONTH: { userPrompt = Prompts::monthlyIncomePrompt; break; };
+	};
 
-	auto userCollectAnnualIncome = [prompt = Prompts::annualIncomePrompt]()
+	auto userCollectAnnualIncome = [userPrompt]()
 		{
-			return inputCollectionHelper(prompt);
+			return inputCollectionHelper(userPrompt);
 		};
 
 	auto userValidateAnnualIncome = [&annualIncomeValidator](std::string inAnnualIncome, double& outAnnualIncome)
@@ -149,25 +160,7 @@ User::IncomePeriod InputCollector::payFrequency()
 		return static_cast<User::IncomePeriod>(outPayFrequency - 1);
 }
 
-// Collects and validates the daily income of the user.
-double InputCollector::collectDailyIncome()
-{
-	InputValidator dailyIncomeValidator;
 
-	auto userDailyIncome = [prompt = Prompts::dailyIncomePrompt]()
-		{
-			return inputCollectionHelper(prompt);
-		};
-
-	auto userValidateDailyIncome = [&dailyIncomeValidator](std::string inDailyIncome, double& outDailyIncome)
-		{
-			bool isDailyIncomeValid = false;
-			isDailyIncomeValid = dailyIncomeValidator.validateAnnualIncome(inDailyIncome, outDailyIncome);
-			return isDailyIncomeValid;
-		};
-
-	return inputLoopLogic<double>(userDailyIncome, userValidateDailyIncome);
-}
 //Collects and validates the days per week worked by the user.
 int InputCollector::collectDaysPerWeek()
 {
@@ -205,6 +198,51 @@ int InputCollector::collectStopsPerDay()
 
 	return inputLoopLogic<int>(userStopsPerDay, userValidateStopsPerDay);
 }
+//collectIncomeDetails() handles the collection of user 
+//income details and applies the proper income frequency
+//calculations for figuring out annual income.
+void InputCollector::collectIncomeDetails(User& user)
+{
+	User::IncomePeriod userSelection = user.getIncomeFrequency();
+	switch (userSelection)
+	{
+	case User::IncomePeriod::STOP :
+	{
+		double runningTotal = 0.0;
+
+		user.setStopsPerDay(collectStopsPerDay());
+		//Keeps a running total of the Income/stop
+		for (int i = 0; i < (user.getStopsPerDay() - 1); i++)
+		{
+			runningTotal = runningTotal + collectIncome(User::IncomePeriod::STOP);
+			user.setIncomeAmount(runningTotal);
+		}
+
+		user.setIncomeAmount(collectIncome(user.getIncomeFrequency()));
+		user.setDaysPerWeek(collectDaysPerWeek());
+		break;
+	};
+	case User::IncomePeriod::DAY :
+	{
+		user.setIncomeAmount(collectIncome(user.getIncomeFrequency()));
+		user.setDaysPerWeek(collectDaysPerWeek());
+		break;
+	};
+	case User::IncomePeriod::WEEK : 
+	{
+		user.setIncomeAmount(collectIncome(user.getIncomeFrequency()));
+		break;
+	};
+	case User::IncomePeriod::MONTH :
+	{
+		user.setIncomeAmount(collectIncome(user.getIncomeFrequency()));
+		break;
+	};
+	}
+
+
+}
+
 
 
 

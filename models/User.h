@@ -12,7 +12,8 @@ public:
 		STOP,
 		DAY,
 		WEEK,
-		MONTH
+		MONTH,
+		NONE
 	};
 
 private:
@@ -41,7 +42,7 @@ private:
 			   businessExpenses_ = 0.0,
 			   incomeAmount_ = 0.0;
 
-	    IncomePeriod incomeFrequency_ = IncomePeriod::STOP;
+	    IncomePeriod incomeFrequency_ = IncomePeriod::NONE;
 
 
 public:

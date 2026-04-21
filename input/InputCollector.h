@@ -9,12 +9,12 @@ public:
 
 	InputCollector(); //Constructor
 
+	void collectIncomeDetails(User&);
+
 	std::string collectName();
 	int collectAge();
 
-	double collectIncome();
-
-	double collectDailyIncome();
+	double collectIncome(User::IncomePeriod);
 
 	int collectDaysPerWeek();
 
@@ -25,6 +25,8 @@ public:
 	char userDisplayChoice();
 
 	User::IncomePeriod payFrequency();
+
+	
 
 private:
 	static std::string inputCollectionHelper(std::string_view prompt);

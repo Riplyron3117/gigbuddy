@@ -1,5 +1,5 @@
 
-#include "IncomeNormalizer.h"
+#include "tax_logic\IncomeNormalizer.h"
 #include "input\InputCollector.h"
 #include "resources\strings.h"
 #include <stdexcept>
@@ -8,15 +8,13 @@ IncomeNormalizer::IncomeNormalizer() {};
 
 double IncomeNormalizer::normalizeIncome(const User& user)
 {
-	InputCollector userDailyIncome;
+	
 	double dailyIncome = 0.0;
 
 	switch (user.getIncomeFrequency())
 	{
 		case User::IncomePeriod::STOP :
 		{
-			userDailyIncome.collectDailyIncome();
-
 			dailyIncome = (user.getIncomeAmount() * user.getStopsPerDay());
 
 			return (dailyIncome * user.getDaysPerWeek()) * 52;
