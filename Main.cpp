@@ -18,36 +18,30 @@ int main()
 	TaxBracketRepository taxRepository;
 	InputCollector infoCollection;
 	IncomeNormalizer incomeNorm;
-	User bob;
+	User user;
 
-		bob.setName(infoCollection.collectName());
-		bob.setAge(infoCollection.collectAge());
-		bob.setIncomeFrequency(infoCollection.payFrequency());
+		user.setName(infoCollection.collectName());
+		user.setAge(infoCollection.collectAge());
+		user.setIncomeFrequency(infoCollection.payFrequency());
 
-		infoCollection.collectIncomeDetails(bob);
+		infoCollection.collectIncomeDetails(user);
 
-		bob.setAnnualIncome(incomeNorm.normalizeIncome(bob));
-		bob.setFilingStatus(infoCollection.collectFilingStatus());
+		user.setAnnualIncome(incomeNorm.normalizeIncome(user));
+		user.setFilingStatus(infoCollection.collectFilingStatus());
 
 		//calculate federal tax and store result
 		// Note: This line chains two operations:
 		//   1. calculateFederalTaxBracketData() - Computes tax using bob's income/filing status and tax bracket tables
 		//   2. setTaxableIncome() - Stores the computed tax value in bob for later display.
-		bob.setTaxableIncome(taxCalculator.calculateFederalTaxBracketData(bob, taxRepository)); //
+		user.setTaxableIncome(taxCalculator.calculateFederalTaxBracketData(user, taxRepository)); //
 
-		bob.setUserDisplayChoice(infoCollection.userDisplayChoice());
+		user.setUserDisplayChoice(infoCollection.userDisplayChoice());
 
-		display.displayController(bob);
+		display.displayController(user);
 	}
 
 	catch(const std::exception& e)
 	{
 		std::cerr << "\n[Error]:" << e.what() << std::endl;
 	}
-
-
-	
-	
-
-	
 }

@@ -9,7 +9,7 @@ public:
 
 	InputCollector(); //Constructor
 
-	void collectIncomeDetails(User&);
+	void collectIncomeDetails(User&); 
 
 	std::string collectName();
 	int collectAge();

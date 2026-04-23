@@ -23,14 +23,24 @@ std::string DisplayService::getFilingStatusName(int filingStatus) const
 
 void DisplayService::displayUserInformation(const User& user) const
 {
-	
-	std::cout << "Name: " << user.getName() << std::endl;
-	std::cout << "Age: " << user.getAge() << std::endl;
-	std::cout << "Days worked: " << user.getDaysPerWeek() << std::endl;
-	std::cout << "Stops per day: " << user.getStopsPerDay() << std::endl;
+	if (user.getIncomeFrequency() == User::IncomePeriod::STOP)
+	{
+		std::cout << "Name: " << user.getName() << std::endl;
+		std::cout << "Age: " << user.getAge() << std::endl;
+		std::cout << "Stops per day: " << user.getStopsPerDay() << std::endl;
+		std::cout << "Days worked: " << user.getDaysPerWeek() << std::endl;
+	}
+
+	else if (user.getIncomeFrequency() == User::IncomePeriod::DAY)
+	{
+		std::cout << "Name: " << user.getName() << std::endl;
+		std::cout << "Age: " << user.getAge() << std::endl;
+		std::cout << "Days worked: " << user.getDaysPerWeek() << std::endl;
+	};
+
+	std::cout << "Pay Frequency: " << frequencyConversionHelper(user.getIncomeFrequency()) <<  std::endl;
 	std::cout << "Annual Income: $" << user.getAnnualIncome() << std::endl;
 	std::cout << "Filing Status: " << getFilingStatusName(user.getFilingStatus()) << std::endl;
-	std::cout << "Pay Frequency: " << frequencyConversionHelper(user.getIncomeFrequency()) <<  std::endl;
 	std::cout << "Calculated Federal Tax: $" << user.getTaxableIncome() << std::endl;
 }
 

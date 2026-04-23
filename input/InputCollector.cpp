@@ -242,8 +242,6 @@ void InputCollector::collectIncomeDetails(User& user)
 		break;
 	};
 	}
-
-
 }
 
 
