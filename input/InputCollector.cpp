@@ -13,7 +13,7 @@ InputCollector::InputCollector() {}
 std::string InputCollector::inputCollectionHelper(std::string_view prompt, int iterator)
 {
 	std::string userInput;
-	if (iterator > 0) { std::cout << std::string(prompt) + std::to_string(iterator) << ":"; }
+	if (iterator > 0) { std::cout << std::string(prompt) + std::to_string(iterator) << ": "; }
 	else std::cout << prompt;
 	std::getline(std::cin, userInput);
 	return userInput;
@@ -205,11 +205,11 @@ int InputCollector::collectStopsPerDay()
 void InputCollector::collectIncomeDetails(User& user)
 {
 	User::IncomePeriod userSelection = user.getIncomeFrequency();
+	double runningTotal = 0.0;
 	switch (userSelection)
 	{
 	case User::IncomePeriod::STOP :
 	{
-		double runningTotal = 0.0;
 
 		user.setStopsPerDay(collectStopsPerDay());
 		//Keeps a running total of the Income/stop
@@ -223,8 +223,12 @@ void InputCollector::collectIncomeDetails(User& user)
 	};
 	case User::IncomePeriod::DAY :
 	{
-		user.setIncomeAmount(collectIncome(user.getIncomeFrequency()));
 		user.setDaysPerWeek(collectDaysPerWeek());
+		for (int i = 0; i <= (user.getDaysPerWeek() - 1); i++)
+		{
+			runningTotal = runningTotal + collectIncome(User::IncomePeriod::DAY, i + 1);
+			user.setIncomeAmount(runningTotal);
+		}
 		break;
 	};
 	case User::IncomePeriod::WEEK : 

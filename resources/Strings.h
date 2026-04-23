@@ -9,7 +9,7 @@ namespace Prompts
 	inline constexpr std::string_view agePrompt = "Please enter a Valid age over 18 years old: ";
 	inline constexpr std::string_view annualIncomePrompt = "Please enter your annual income: ";
 	inline constexpr std::string_view perStopPrompt = "Please enter the income recieved for stop ";
-	inline constexpr std::string_view dailyIncomePrompt = "Please enter your income for the day: ";
+	inline constexpr std::string_view dailyIncomePrompt = "Please enter your income for day  ";
 	inline constexpr std::string_view weeklyIncomePrompt = "Please enter your income for the week: ";
 	inline constexpr std::string_view monthlyIncomePrompt = "Please enter your income for the month: ";
 	inline constexpr std::string_view daysPerWeekPrompt = "Please enter the number of days you worked this week: ";
