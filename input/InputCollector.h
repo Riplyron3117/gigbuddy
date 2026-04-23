@@ -14,7 +14,7 @@ public:
 	std::string collectName();
 	int collectAge();
 
-	double collectIncome(User::IncomePeriod);
+	double collectIncome(User::IncomePeriod, int iterator);
 
 	int collectDaysPerWeek();
 
@@ -29,5 +29,5 @@ public:
 	
 
 private:
-	static std::string inputCollectionHelper(std::string_view prompt);
+	static std::string inputCollectionHelper(std::string_view prompt, int iterator = 0);
 };

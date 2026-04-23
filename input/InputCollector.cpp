@@ -10,10 +10,11 @@
 InputCollector::InputCollector() {}
 
 
-std::string InputCollector::inputCollectionHelper(std::string_view prompt)
+std::string InputCollector::inputCollectionHelper(std::string_view prompt, int iterator)
 {
 	std::string userInput;
-	std::cout << prompt;
+	if (iterator > 0) { std::cout << std::string(prompt) + std::to_string(iterator) << ":"; }
+	else std::cout << prompt;
 	std::getline(std::cin, userInput);
 	return userInput;
 }
@@ -66,7 +67,7 @@ int InputCollector::collectAge()
 }
 
 //Collects and validates annual income of user.
-double InputCollector::collectIncome(User::IncomePeriod frequency = User::IncomePeriod::NONE)
+double InputCollector::collectIncome(User::IncomePeriod frequency, int iterator = 0)
 {
 	InputValidator annualIncomeValidator;
 	
@@ -79,9 +80,9 @@ double InputCollector::collectIncome(User::IncomePeriod frequency = User::Income
 	case User::IncomePeriod::MONTH: { userPrompt = Prompts::monthlyIncomePrompt; break; };
 	};
 
-	auto userCollectAnnualIncome = [userPrompt]()
+	auto userCollectAnnualIncome = [userPrompt, iterator]()
 		{
-			return inputCollectionHelper(userPrompt);
+			return inputCollectionHelper(userPrompt, iterator);
 		};
 
 	auto userValidateAnnualIncome = [&annualIncomeValidator](std::string inAnnualIncome, double& outAnnualIncome)
@@ -212,13 +213,11 @@ void InputCollector::collectIncomeDetails(User& user)
 
 		user.setStopsPerDay(collectStopsPerDay());
 		//Keeps a running total of the Income/stop
-		for (int i = 0; i < (user.getStopsPerDay() - 1); i++)
+		for (int i = 0; i <= (user.getStopsPerDay()-1); i++)
 		{
-			runningTotal = runningTotal + collectIncome(User::IncomePeriod::STOP);
+			runningTotal = runningTotal + collectIncome(User::IncomePeriod::STOP, i+1);
 			user.setIncomeAmount(runningTotal);
 		}
-
-		user.setIncomeAmount(collectIncome(user.getIncomeFrequency()));
 		user.setDaysPerWeek(collectDaysPerWeek());
 		break;
 	};

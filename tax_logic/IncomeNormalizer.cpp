@@ -10,14 +10,14 @@ double IncomeNormalizer::normalizeIncome(const User& user)
 {
 	
 	double dailyIncome = 0.0;
-
+	double annualIncome = 0.0;
 	switch (user.getIncomeFrequency())
 	{
 		case User::IncomePeriod::STOP :
 		{
-			dailyIncome = (user.getIncomeAmount() * user.getStopsPerDay());
+			dailyIncome = (user.getIncomeAmount());
 
-			return (dailyIncome * user.getDaysPerWeek()) * 52;
+			return annualIncome = (dailyIncome * user.getDaysPerWeek()) * 52;
 		}
 
 		case User::IncomePeriod::DAY :
@@ -38,5 +38,7 @@ double IncomeNormalizer::normalizeIncome(const User& user)
 
 		default: throw std::invalid_argument(std::string(ErrorMessages::invalidPayFrequency));
 	}
+
+	//return user.setAnnualIncome(annualIncome);
 
 }
