@@ -20,27 +20,27 @@ private:
 		std::string name_ = "";
 		std::string state_ = "";
 
-		char userDisplayChoice_ = ' ';
+		char userDisplayChoice_ = ' '; //done
 
 		int age_ = 0,
-		    filingStatus_ = 0,
-		    stopsPerDay_ = 0,
-		    daysPerWeek_ = 0;
+		    filingStatus_ = 0, //done
+		    stopsPerDay_ = 0, // done
+		    daysPerWeek_ = 0; //done
 
 		double safeSpendingAmount_ = 0.0,
-			   quarterlyPayment_ = 0.0,
-			   totalTaxOwed_ = 0.0,
-			   stateTax_ = 0.0,
-			   federalIncomeTax_ = 0.0,
-			   federalTaxableIncome_ = 0.0,
-			   seDeduction_ = 0.0,
-			   seTax_ = 0.0,
-			   standardDeduction_ = 0.0,
-			   netSEIncome_ = 0.0,
-			   annualIncome_ = 0.0,
-			   taxableIncome_ = 0.0,
-			   businessExpenses_ = 0.0,
-			   incomeAmount_ = 0.0;
+			   quarterlyPayment_ = 0.0, //quarterly payment user should make towards their taxes
+			   totalTaxOwed_ = 0.0,		//total amount of taxes the user owes fo the  year
+			   stateTax_ = 0.0,			//state taxes owed by the user.
+			   federalIncomeTax_ = 0.0,	//federal taxes owed by the user.
+			   federalTaxableIncome_ = 0.0, //amount of federally taxable income
+			   seDeduction_ = 0.0,		//the self employed deduction maded by the user.
+			   seTax_ = 0.0,			//self employment tax
+			   standardDeduction_ = 0.0, //Standard deduction that the user can make.
+			   netSEIncome_ = 0.0,		 //net self employed income after taxes have been deducted.
+			   annualIncome_ = 0.0,		//annual income of the user before taxes
+			   taxableIncome_ = 0.0,	//user's total taxable income
+			   businessExpenses_ = 0.0, //user's business expenses
+			   incomeAmount_ = 0.0;		//users income amount for the stop/day/week/month
 
 	    IncomePeriod incomeFrequency_ = IncomePeriod::NONE;
 
@@ -49,7 +49,7 @@ public:
 	//getters for user data
 
 		
-	std::string getName() const { return name_; }
+	std::string getName() const { return name_; } 
 	
 	std::string getState() const { return state_; }
 
